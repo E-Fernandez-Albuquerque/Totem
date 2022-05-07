@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 
-public class dbConnection {
+public class DBConnection {
 
 	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://localhost:3306/totemcesar?useUnicode=yes&characterEncoding=UTF-8&useSSL=false";
 	private static final String USER = "root";
 	private static final String PWD = "";
 	
-	public static Connection conectarDB() {
+	public static Connection conectDB() {
 
 		try {
 			Class.forName(DRIVER);

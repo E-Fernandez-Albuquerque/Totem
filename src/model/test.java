@@ -3,7 +3,10 @@ package model;
 public class test {
 
 	public static void main(String[] args) {
-		dbConnection.conectarDB();
+		DBConnection.conectDB();
+		DBTables.createTableUser();
+		DBTables.createTableStation();
+		DBTables.createTableReservation();
 		
 	}
 
