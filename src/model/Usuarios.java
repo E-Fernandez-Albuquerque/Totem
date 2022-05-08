@@ -1,5 +1,6 @@
 package model;
 
+//CRIA OS MODELOS DE USUÁRIOS E SUAS FUNÇÕES GET E SET
 public class Usuarios {
 	
 	private String id;

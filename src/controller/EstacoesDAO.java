@@ -10,34 +10,37 @@ import model.Estacoes;
 
 public class EstacoesDAO {
 	
-	public static void insertStation(Estacoes estacoes) {
-		Connection connection = DBConnection.conectDB();
-		PreparedStatement statement = null;
+	//FUNÇÃO RESPONSÁVEL POR INSERIR E PERSISTIR REGISTRO DE ESTAÇÕES EM BANCO DE DADOS
+	public static void insertStation(Estacoes estacao) {
+		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 		
+		//COMANDOS SQL
 		try {
-			statement = connection.prepareStatement("INSERT INTO estacoes (id) VALUES (?, ?)");
-			statement.setString(1, user.getId());
-			statement.setString(2, user.getName());
+			statement = connection.prepareStatement("INSERT INTO estacoes (id) VALUES (?)");
+			
+			statement.setString(1, estacao.getId());//SUBSTITUI O VALOR DA "?" DO STATEMENT 
 			statement.executeUpdate();
 		}catch (SQLException e){
-			e.printStackTrace();
+			e.printStackTrace();//EXIBIR OS ERROS DE CÓDIGO SQL
 		}
 	}
 
-	public static String searchUser(Usuarios user) {
-		Connection connection = DBConnection.conectDB();
-		PreparedStatement statement;
-		ResultSet result;
+	public static String searchStation(Estacoes estacao) {
+		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		PreparedStatement statement;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
+		ResultSet result;//MODELO DE RETORNO DE VALORES DO DB
+		
 		try {
-			statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
-			statement.setString(1, user.getId());
-			result = statement.executeQuery();
-			result.next();
-			return result.getString("name");
+			statement = connection.prepareStatement("SELECT * FROM estacoes WHERE id = ?");
+			statement.setString(1, estacao.getId());//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			result = statement.executeQuery();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
+			result.next();//ORDENAÇÃO DO CURSOR NO RESULTSET
+			return result.getString("id");//SELECIONA A COLUNA A SER RETORNADA
 			
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			e1.printStackTrace();//EXIBIR OS ERROS DE CÓDIGO SQL
+			return "(Erro) Estacao nao localizada";
 		}
-		return null;
 	}
 }

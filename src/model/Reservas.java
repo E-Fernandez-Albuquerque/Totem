@@ -1,32 +1,32 @@
 package model;
 
+//CRIA OS MODELOS DE RESERVAS E SUAS FUNÇÕES GET E SET
 public class Reservas {
 	
-	private String id;
-	private String station;
+	private String id_usuario;
+	private String id_estacao;
 	private String date;
 	private int duration;
 	private boolean checkin;
 	private boolean checkout;
 	
-	public Reservas() {
-		
-	}
-	
-	public String getId() {
-		return id;
-	}
-	
-	public void setId(String id) {
-		this.id = id;
+	public Reservas() {	
 	}
 
-	public String getStation() {
-		return station;
+	public String getId_usuario() {
+		return id_usuario;
 	}
 
-	public void setStation(String station) {
-		this.station = station;
+	public void setId_usuario(String id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
+	public String getId_estacao() {
+		return id_estacao;
+	}
+
+	public void setId_estacao(String id_estacao) {
+		this.id_estacao = id_estacao;
 	}
 
 	public String getDate() {
@@ -60,6 +60,8 @@ public class Reservas {
 	public void setCheckout(boolean checkout) {
 		this.checkout = checkout;
 	}
+	
+	
 	
 	
 }

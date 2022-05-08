@@ -4,41 +4,40 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import model.DBConnection;
 import model.Usuarios;
 
 public class UsuariosDAO {
-	
+	//INSERIR E PERSISTIR USUÁRIO EM DB
 	public static void insertUser(Usuarios usuario) {
-		Connection connection = DBConnection.conectDB();
-		PreparedStatement statement = null;
+		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 		
 		try {
-			statement = connection.prepareStatement("INSERT INTO usuarios (id, name) VALUES (?, ?)");
-			statement.setString(1, usuario.getId());
-			statement.setString(2, usuario.getName());
-			statement.executeUpdate();
+			statement = connection.prepareStatement("INSERT INTO usuarios (id, name) VALUES (?, ?)");//COMANDO SQL
+			statement.setString(1, usuario.getId());//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.setString(2, usuario.getName());//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.executeUpdate();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
 		}catch (SQLException e){
-			e.printStackTrace();
+			e.printStackTrace();//EXIBIR OS ERROS DE CÓDIGO SQL
 		}
 	}
-	
+	//PROCURAR E RETORNAR USUÁRIO DO DB
 	public static String searchUser(Usuarios usuario) {
-		Connection connection = DBConnection.conectDB();
-		PreparedStatement statement;
-		ResultSet result;
+		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		PreparedStatement statement;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
+		ResultSet result;//MODELO DE RETORNO DE VALORES DO DB
 		try {
-			statement = connection.prepareStatement("SELECT * FROM usuarios WHERE id = ?");
-			statement.setString(1, usuario.getId());
-			result = statement.executeQuery();
-			result.next();
-			return result.getString("nome");
+			statement = connection.prepareStatement("SELECT * FROM usuarios WHERE id = ?");//COMANDO SQL
+			statement.setString(1, usuario.getId());//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			result = statement.executeQuery();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
+			result.next();//ORDENAÇÃO DO CURSOR NO RESULTSET
+			return result.getString("name");//DEFINE COLUNA A SER RETORNADA
 			
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			e1.printStackTrace();//EXIBIR OS ERROS DE CÓDIGO SQL
+			return "(Erro) Usuario nao localizado";
 		}
-		return null;
 	}
 }
