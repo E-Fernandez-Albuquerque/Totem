@@ -71,6 +71,7 @@ public class ReservasDAO {
 				statement = connection.prepareStatement("UPDATE reservas SET checkin = true WHERE id_usuario = ?");
 				statement.setString(1, usuario.getId());//SUBSTITUI O VALOR DA "?" DO STATEMENT 
 				statement.executeUpdate();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
+				System.out.println("Realizando checkin...");
 			}catch (SQLException e){
 				e.printStackTrace();//EXIBIR OS ERROS DE CÓDIGO SQL
 			}
@@ -80,11 +81,19 @@ public class ReservasDAO {
 				statement = connection.prepareStatement("UPDATE reservas SET checkout = true WHERE id_usuario = ?");
 				statement.setString(1, usuario.getId());
 				statement.executeUpdate();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
+				System.out.println("Realizando checkout...");
 			}catch (SQLException e){
 				e.printStackTrace();//EXIBIR OS ERROS DE CÓDIGO SQL
 			}
 		} else {
-			
+			try {
+				statement = connection.prepareStatement("DELETE FROM reservas WHERE id_usuario = ?");
+				statement.setString(1, usuario.getId());
+				statement.executeUpdate();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
+				System.out.println("Realizar nova reserva!");
+			}catch (SQLException e){
+				e.printStackTrace();//EXIBIR OS ERROS DE CÓDIGO SQL
+			}
 		}	
 		} catch (SQLException e) {
 			e.printStackTrace();

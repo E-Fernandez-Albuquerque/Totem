@@ -24,7 +24,7 @@ public class UsuariosDAO {
 		}
 	}
 	//PROCURAR E RETORNAR USUÁRIO DO DB
-	public static String searchUser(Usuarios usuario) {
+	public static ResultSet searchUser(Usuarios usuario) {
 		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 		ResultSet result;//MODELO DE RETORNO DE VALORES DO DB
@@ -32,12 +32,11 @@ public class UsuariosDAO {
 			statement = connection.prepareStatement("SELECT * FROM usuarios WHERE id = ?");//COMANDO SQL
 			statement.setString(1, usuario.getId());//SUBSTITUI O VALOR DA "?" DO STATEMENT 
 			result = statement.executeQuery();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
-			result.next();//ORDENAÇÃO DO CURSOR NO RESULTSET
-			return result.getString("name");//DEFINE COLUNA A SER RETORNADA
+			return result;
 			
 		} catch (SQLException e1) {
 			e1.printStackTrace();//EXIBIR OS ERROS DE CÓDIGO SQL
-			return "(Erro) Usuario nao localizado";
+			return null;
 		}
 	}
 }

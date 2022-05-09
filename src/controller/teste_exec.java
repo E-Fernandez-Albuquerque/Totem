@@ -16,43 +16,45 @@ public class teste_exec {
 	public static void main(String[] args) throws SQLException {
 		
 		Scanner sc = new Scanner(System.in);
-		/*
-		DBConnection.conectDB();
-		DBTables.createTableUser();
-		DBTables.createTableStation();
-		DBTables.createTableReservation();
-		*/
+		
+		//CRIAÇÃO DE OBJETOS
+		Reservas reserva = new Reservas();
+		reserva.setCheckin(false);
+		reserva.setCheckout(false);
+		reserva.setDate("09/05/2022");
+		reserva.setDuration(8);
+		
 		Usuarios usuario = new Usuarios();
-		usuario.setId("123");
-		usuario.setName("Usuario Teste RFID");
-		UsuariosDAO.insertUser(usuario);
+		usuario.setId("555");
+		usuario.setName("Eric");
 		
 		Estacoes estacao = new Estacoes();
-		estacao.setId("A02");
-		EstacoesDAO.insertStation(estacao);
+		estacao.setId("B38");
 		
-		Reservas reserva = new Reservas();
-		reserva.setDate("08/05/2022");
-		reserva.setDuration(8);
-		reserva.setCheckout(false);
-		reserva.setCheckin(false);
+		//PERSISTÊNCIA EM DB (CREATE)
+		UsuariosDAO.insertUser(usuario);
+		EstacoesDAO.insertStation(estacao);
 		ReservasDAO.insertReservation(reserva, estacao, usuario);
 		
-		String rUsuario = UsuariosDAO.searchUser(usuario);
-		String rEstacao = EstacoesDAO.searchStation(estacao);
-		ResultSet rDataReserva = ReservasDAO.searchReservation(usuario);
-		rDataReserva.next();
-		String data = rDataReserva.getString("date");
-		System.out.println("Reserva encontrada: " + rUsuario + " - " + rEstacao + " - " + rDataReserva.getString("date"));
-		System.out.println("Status: Checkin=" + rDataReserva.getBoolean("checkin") + " Checkout=" + rDataReserva.getBoolean("checkout"));
-		System.out.print("Insira o seu id: ");
+		//RECUPERAÇÃO DE INFORMAÇÕES (READ)
+		Usuarios usuario2 = new Usuarios();
+		System.out.println("ID: ");
 		String id = sc.nextLine();
-		Usuarios id_RFID = new Usuarios();
-		id_RFID.setId(id);
-		System.out.println("Realizando checkin...");
-		ReservasDAO.leitura_id(id_RFID);
-		ResultSet RFID = ReservasDAO.searchReservation(id_RFID);
-		RFID.next();
-		System.out.println("Status: Checkin=" + RFID.getBoolean("checkin") + " Checkout=" + RFID.getBoolean("checkout"));
+		usuario2.setId(id);
+		ResultSet retornoDB = UsuariosDAO.searchUser(usuario2);
+		try {
+			
+			retornoDB.next();
+			String userName = retornoDB.getString("name");
+			System.out.println("Nome do usuario: " + userName);
+		
+			ResultSet reservaDB = ReservasDAO.searchReservation(usuario2);
+			reservaDB.next();
+			String stationId = reservaDB.getString("id_estacao");
+			String stationDate = reservaDB.getString("date");
+			System.out.print("Estacao reservada: " + stationId + " - " + stationDate);
+		} catch (SQLException e){
+			System.out.println("ID nao localizado!");
+		}
 	}
 }
