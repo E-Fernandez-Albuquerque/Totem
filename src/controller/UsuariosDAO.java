@@ -39,4 +39,20 @@ public class UsuariosDAO {
 			return null;
 		}
 	}
+	
+	//FUNÇÃO TESTE
+		public static void inserirRegistrosMockados(String id, String nome, String time) {
+			Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+			PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
+			
+			try {
+				statement = connection.prepareStatement("INSERT INTO funcionarios (id, nome, meu_time) VALUES (?, ?, ?)");//COMANDO SQL
+				statement.setString(1, id);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+				statement.setString(2, nome);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+				statement.setString(3, time);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+				statement.executeUpdate();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
+			}catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
 }

@@ -43,4 +43,20 @@ public class EstacoesDAO {
 			return "(Erro) Estacao nao localizada";
 		}
 	}
+	
+	// FUNÇÃO TESTE
+	public static void inserirEstacaoMockada(String id) {
+		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
+		
+		//COMANDOS SQL
+		try {
+			statement = connection.prepareStatement("INSERT INTO estacoes (estacao) VALUES (?)");
+			
+			statement.setString(1, id);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.executeUpdate();
+		}catch (SQLException e){
+			e.printStackTrace();//EXIBIR OS ERROS DE CÓDIGO SQL
+		}
+	}
 }

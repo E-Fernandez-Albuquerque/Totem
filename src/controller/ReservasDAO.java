@@ -99,4 +99,53 @@ public class ReservasDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	//FUNÇÃO DE TESTE
+	public static void inserirReservaMockada(int idReserva, String idEstacao, String dataHoraInicio, String dataHoraFim, String checkin, String checkout, String idFuncionario) {
+		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
+		
+		try {
+			statement = connection.prepareStatement("INSERT INTO reservas (id_reserva, id_estacao, reserva_inicia_em, reserva_termina_em, check_in_em, check_out_em, id_funcionario) VALUES (?, ?, ?, ?, ?, ?, ?)");//COMANDO SQL
+			statement.setInt(1, idReserva);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.setString(2, idEstacao);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.setString(3, dataHoraInicio);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.setString(4, dataHoraFim);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.setString(5, checkin);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.setString(6, checkout);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.setString(7,idFuncionario);
+			statement.executeUpdate();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public static void fazerCheckin(String id, String horaInicio) {
+		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
+		ResultSet result;//MODELO DE RETORNO DE VALORES DO DB
+		try {
+			statement = connection.prepareStatement("select * from reservas where id_funcionario = ? and reserva_inicia_em = ?");//COMANDO SQL
+			statement.setString(1, id);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.setString(2, horaInicio);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			result = statement.executeQuery();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
+			result.next();
+			
+			String checkin = result.getString("check_in_em");
+			String inicio = result.getString("reserva_inicia_em");
+			if (checkin != null) {
+				System.out.println("Realizando checkout");
+			} else {
+				statement = connection.prepareStatement("UPDATE reservas SET check_in_em = ? WHERE id_funcionario = ? AND reserva_inicia_em = ?");//COMANDO SQL
+				statement.setString(1, inicio);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+				statement.setString(2, id);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+				statement.setString(3, horaInicio);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+				statement.executeUpdate();
+			}
+				
+			
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+	}
 }

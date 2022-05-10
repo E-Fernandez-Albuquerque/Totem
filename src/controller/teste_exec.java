@@ -15,6 +15,13 @@ public class teste_exec {
 
 	public static void main(String[] args) throws SQLException {
 		
+		//UsuariosDAO.inserirRegistrosMockados("32112ARR", "Eric", "Desenvolvimento");
+		//EstacoesDAO.inserirEstacaoMockada("A22");
+		//ReservasDAO.inserirReservaMockada(1, "A22", "2022-05-15 08:00:00", "2022-05-15 12:00:00", null, null, "32112ARR");
+		
+		ReservasDAO.fazerCheckin("32112ARR", "2022-05-15 08:00:00");
+		
+		/*
 		Scanner sc = new Scanner(System.in);
 		
 		//CRIAÇÃO DE OBJETOS
@@ -43,7 +50,6 @@ public class teste_exec {
 		usuario2.setId(id);
 		ResultSet retornoDB = UsuariosDAO.searchUser(usuario2);
 		try {
-			
 			retornoDB.next();
 			String userName = retornoDB.getString("name");
 			System.out.println("Nome do usuario: " + userName);
@@ -54,7 +60,13 @@ public class teste_exec {
 			String stationDate = reservaDB.getString("date");
 			System.out.print("Estacao reservada: " + stationId + " - " + stationDate);
 		} catch (SQLException e){
+			int test = 5;
+			if (test==5) {
+				System.out.println("IF dentro de catch");
+			} else {
+				System.out.println("else dentro de catch");
+			}
 			System.out.println("ID nao localizado!");
 		}
-	}
+	*/}
 }
