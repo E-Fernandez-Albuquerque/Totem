@@ -1,15 +1,12 @@
-package controller;
+package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import model.DBConnection;
-import model.Estacoes;
-
 public class EstacoesDAO {
-	
+	/*
 	//FUNÇÃO RESPONSÁVEL POR INSERIR E PERSISTIR REGISTRO DE ESTAÇÕES EM BANCO DE DADOS
 	public static void insertStation(Estacoes estacao) {
 		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
@@ -43,8 +40,8 @@ public class EstacoesDAO {
 			return "(Erro) Estacao nao localizada";
 		}
 	}
+	*/
 	
-	// FUNÇÃO TESTE
 	public static void inserirEstacaoMockada(String id) {
 		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
@@ -58,5 +55,23 @@ public class EstacoesDAO {
 		}catch (SQLException e){
 			e.printStackTrace();//EXIBIR OS ERROS DE CÓDIGO SQL
 		}
+	}
+	
+	public static String verificarEstacoesLivres (String checkinDateTime) {
+		Connection connection = DBConnection.conectDB();
+		PreparedStatement statement = null;
+		ResultSet estacoesLivres;
+		try {
+			statement = connection.prepareStatement("SELECT estacao FROM estacoes WHERE estacao NOT IN (SELECT id_estacao FROM reservas WHERE reserva_inicia_em = ?)");
+			statement.setString(1, checkinDateTime);
+			estacoesLivres = statement.executeQuery();
+			while (estacoesLivres.next()) {
+				System.out.println(estacoesLivres.getString("estacao"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return ("Erro durante  a verificação");
+		}
+		return "Fim";
 	}
 }

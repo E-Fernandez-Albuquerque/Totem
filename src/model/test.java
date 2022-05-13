@@ -8,6 +8,8 @@ public class test {
 		DBTables.criarTabelaFuncionarios();
 		DBTables.criarTabelaEstacoes();
 		DBTables.criarTabelaReservas();
+		
+		EstacoesDAO.verificarEstacoesLivres("2022-05-15 08:00:00");
 	}
 
 }

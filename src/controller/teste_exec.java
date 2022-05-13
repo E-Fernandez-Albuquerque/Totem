@@ -6,20 +6,62 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import model.Usuarios;
+import model.UsuariosDAO;
 import model.DBConnection;
 import model.DBTables;
 import model.Estacoes;
+import model.EstacoesDAO;
 import model.Reservas;
+import model.ReservasDAO;
 
 public class teste_exec {
 
 	public static void main(String[] args) throws SQLException {
 		
-		//UsuariosDAO.inserirRegistrosMockados("32112ARR", "Eric", "Desenvolvimento");
+		//UsuariosDAO.inserirFuncionario("32112ARR", "Eric", "Desenvolvimento");
 		//EstacoesDAO.inserirEstacaoMockada("A22");
 		//ReservasDAO.inserirReservaMockada(1, "A22", "2022-05-15 08:00:00", "2022-05-15 12:00:00", null, null, "32112ARR");
 		
-		ReservasDAO.fazerCheckin("32112ARR", "2022-05-15 08:00:00");
+		//ReservasDAO.fazerCheckin("32112ARR", "2022-05-15 08:00:00");
+		
+		
+		while (true) {
+			Scanner sc = new Scanner (System.in);
+		
+			System.out.println("ID: ");
+			String id = sc.nextLine();
+			String horaInicio = "2022-05-15 08:00:00";
+			String horaSaida = "2022-05-15 12:00:00";
+		
+			String idRetorno = UsuariosDAO.procurarFuncionario(id);
+		
+			if (idRetorno != null) {
+				boolean reserva = ReservasDAO.verificaReserva(idRetorno, horaInicio);
+				boolean checkin = ReservasDAO.verificaCheckinReserva(idRetorno, horaInicio);
+				boolean checkout = ReservasDAO.verificaCheckoutReserva(idRetorno, horaSaida);
+				if (reserva && !checkin && !checkout) {
+					ReservasDAO.fazerCheckin(idRetorno, horaInicio);
+					System.out.println("Realizando checkin...");
+					continue;
+				} else if (reserva && checkin && !checkout){
+					ReservasDAO.fazerCheckout(idRetorno, horaSaida);
+					System.out.println("Realizando checkout...");
+					continue;
+				} else {
+					System.out.println("Nenhuma reserva localizada para o usuário. Realize uma nova reserva.");
+					System.out.println("Estações livres: ");
+					EstacoesDAO.verificarEstacoesLivres(horaInicio);
+					break;
+				}
+			} else {
+				System.out.println("Usuário não identificado");
+			}
+		}
+		
+		
+
+		
+		
 		
 		/*
 		Scanner sc = new Scanner(System.in);

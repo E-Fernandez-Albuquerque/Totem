@@ -1,15 +1,9 @@
-package controller;
+package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import model.DBConnection;
-import model.Reservas;
-import model.Estacoes;
-import model.Usuarios;
-
 import java.util.Scanner;
 
 public class ReservasDAO {
@@ -133,19 +127,107 @@ public class ReservasDAO {
 			
 			String checkin = result.getString("check_in_em");
 			String inicio = result.getString("reserva_inicia_em");
-			if (checkin != null) {
-				System.out.println("Realizando checkout");
-			} else {
+			if (checkin == null) {
 				statement = connection.prepareStatement("UPDATE reservas SET check_in_em = ? WHERE id_funcionario = ? AND reserva_inicia_em = ?");//COMANDO SQL
 				statement.setString(1, inicio);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
 				statement.setString(2, id);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
 				statement.setString(3, horaInicio);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
 				statement.executeUpdate();
 			}
-				
-			
-		}catch (SQLException e){
+		} catch (SQLException e){
 			e.printStackTrace();
 		}
+	}
+	
+	public static boolean verificaReserva(String idFuncionario, String horaInicio) {
+		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
+		ResultSet reserva;
+		
+		try {
+			statement = connection.prepareStatement("SELECT * FROM reservas WHERE id_funcionario = ? AND reserva_inicia_em = ?");
+			statement.setString(1, idFuncionario);
+			statement.setString(2, horaInicio);
+			reserva = statement.executeQuery();
+			if (reserva.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public static boolean verificaCheckinReserva(String idFuncionario, String horaInicio) {
+		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
+		ResultSet reserva;
+		
+		try {
+			statement = connection.prepareStatement("SELECT check_in_em FROM reservas WHERE id_funcionario = ? AND reserva_inicia_em = ?");
+			statement.setString(1, idFuncionario);
+			statement.setString(2, horaInicio);
+			reserva = statement.executeQuery();
+			if (reserva.next()) {
+				String checkin = reserva.getString("check_in_em");
+				if (checkin == null) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public static void fazerCheckout(String id, String horaSaida) {
+		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
+		ResultSet result;//MODELO DE RETORNO DE VALORES DO DB
+		try {
+			statement = connection.prepareStatement("select * from reservas where id_funcionario = ? and reserva_termina_em = ?");//COMANDO SQL
+			statement.setString(1, id);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.setString(2, horaSaida);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			result = statement.executeQuery();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
+			result.next();
+			
+			String checkout = result.getString("check_out_em");
+			String horaFinal = result.getString("reserva_termina_em");
+			if (checkout == null) {
+				statement = connection.prepareStatement("UPDATE reservas SET check_out_em = ? WHERE id_funcionario = ? AND reserva_termina_em = ?");//COMANDO SQL
+				statement.setString(1, horaFinal);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+				statement.setString(2, id);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+				statement.setString(3, horaSaida);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+				statement.executeUpdate();
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public static boolean verificaCheckoutReserva(String idFuncionario, String horaFinal) {
+		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
+		ResultSet reserva;
+		
+		try {
+			statement = connection.prepareStatement("SELECT check_out_em FROM reservas WHERE id_funcionario = ? AND reserva_termina_em = ?");
+			statement.setString(1, idFuncionario);
+			statement.setString(2, horaFinal);
+			reserva = statement.executeQuery();
+			if (reserva.next()) {
+				String checkout = reserva.getString("check_out_em");
+				if (checkout == null) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
