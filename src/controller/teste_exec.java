@@ -19,41 +19,41 @@ public class teste_exec {
 	public static void main(String[] args) throws SQLException {
 		
 		//UsuariosDAO.inserirFuncionario("32112ARR", "Eric", "Desenvolvimento");
-		//EstacoesDAO.inserirEstacaoMockada("A22");
-		//ReservasDAO.inserirReservaMockada(1, "A22", "2022-05-15 08:00:00", "2022-05-15 12:00:00", null, null, "32112ARR");
+		//EstacoesDAO.inserirEstacao("A22");
+		//ReservasDAO.inserirReserva(1, "A22", "2022-05-15 08:00:00", "2022-05-15 12:00:00", null, null, "32112ARR");
 		
 		//ReservasDAO.fazerCheckin("32112ARR", "2022-05-15 08:00:00");
 		
 		
 		while (true) {
-			Scanner sc = new Scanner (System.in);
+			Scanner sc = new Scanner (System.in);//INICIALIZA UM SCANNER PARA LEITURA DO ID
 		
 			System.out.println("ID: ");
-			String id = sc.nextLine();
+			String id = sc.nextLine();//AGUARDA INSERÇÃO DO ID
 			String horaInicio = "2022-05-15 08:00:00";
 			String horaSaida = "2022-05-15 12:00:00";
 		
-			String idRetorno = UsuariosDAO.procurarFuncionario(id);
+			String idRetorno = UsuariosDAO.procurarFuncionario(id);//VERIFICA EXISTÊNCIA DO ID
 		
-			if (idRetorno != null) {
-				boolean reserva = ReservasDAO.verificaReserva(idRetorno, horaInicio);
-				boolean checkin = ReservasDAO.verificaCheckinReserva(idRetorno, horaInicio);
-				boolean checkout = ReservasDAO.verificaCheckoutReserva(idRetorno, horaSaida);
-				if (reserva && !checkin && !checkout) {
-					ReservasDAO.fazerCheckin(idRetorno, horaInicio);
+			if (idRetorno != null) {//CASO O ID NÃO SEJA NULO
+				boolean reserva = ReservasDAO.verificaReserva(idRetorno, horaInicio);//VERIFICA EXISTÊNCIA DE RESERVA
+				boolean checkin = ReservasDAO.verificaCheckinReserva(idRetorno, horaInicio);//VERIFICA EXISTÊNCIA DE CHECKIN
+				boolean checkout = ReservasDAO.verificaCheckoutReserva(idRetorno, horaSaida);//VERIFICA EXISTÊNCIA DE CHECKOUT
+				if (reserva && !checkin && !checkout) {//SE EXISTIR APENAS RESERVA
+					ReservasDAO.fazerCheckin(idRetorno, horaInicio);//REALIZA O CHECKIN
 					System.out.println("Realizando checkin...");
 					continue;
-				} else if (reserva && checkin && !checkout){
-					ReservasDAO.fazerCheckout(idRetorno, horaSaida);
+				} else if (reserva && checkin && !checkout){//SE CHECKIN JÁ FOI REALIZADO
+					ReservasDAO.fazerCheckout(idRetorno, horaSaida);//REALIZA O CHECKOUT
 					System.out.println("Realizando checkout...");
 					continue;
-				} else {
+				} else {//CASO NÃO EXISTA RESERVA
 					System.out.println("Nenhuma reserva localizada para o usuário. Realize uma nova reserva.");
 					System.out.println("Estações livres: ");
-					EstacoesDAO.verificarEstacoesLivres(horaInicio);
+					EstacoesDAO.verificarEstacoesLivres(horaInicio);//PRINTA ESTAÇÕES LIVRES PARA O HORÁRIO ESPECIFICADO
 					break;
 				}
-			} else {
+			} else {//CASO ID NÃO SEJA IDENTIFICADO
 				System.out.println("Usuário não identificado");
 			}
 		}

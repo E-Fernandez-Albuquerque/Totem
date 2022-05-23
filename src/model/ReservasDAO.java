@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class ReservasDAO {
-	
+	/*
+	//SEM USO
 	public static void insertReservation(Reservas reserva, Estacoes estacao, Usuarios usuario) {
 		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
@@ -25,7 +26,8 @@ public class ReservasDAO {
 			e.printStackTrace();
 		}
 	}
-
+	
+	//SEM USO
 	public static ResultSet searchReservation(Usuarios usuario) {
 		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
@@ -93,9 +95,9 @@ public class ReservasDAO {
 			e.printStackTrace();
 		}
 	}
-	
-	//FUNÇÃO DE TESTE
-	public static void inserirReservaMockada(int idReserva, String idEstacao, String dataHoraInicio, String dataHoraFim, String checkin, String checkout, String idFuncionario) {
+	*/
+	//FUNÇÃO QUE REGISTRA UMA NOVA RESERVA
+	public static void inserirReserva(int idReserva, String idEstacao, String dataHoraInicio, String dataHoraFim, String checkin, String checkout, String idFuncionario) {
 		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 		
@@ -113,7 +115,7 @@ public class ReservasDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	//REALIZA O CHECKIN DE UMA RESERVA
 	public static void fazerCheckin(String id, String horaInicio) {
 		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
@@ -138,7 +140,7 @@ public class ReservasDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	//VERIFICA STATUS DA RESERVA - RETORNA BOOLEANO
 	public static boolean verificaReserva(String idFuncionario, String horaInicio) {
 		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
@@ -157,7 +159,7 @@ public class ReservasDAO {
 		}
 		return false;
 	}
-	
+	//VERIFICA STATUS DE CHECKIN - RETORNA BOOLEANO
 	public static boolean verificaCheckinReserva(String idFuncionario, String horaInicio) {
 		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
@@ -181,7 +183,7 @@ public class ReservasDAO {
 		}
 		return false;
 	}
-	
+	//FAZ CHECKOUT
 	public static void fazerCheckout(String id, String horaSaida) {
 		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
@@ -206,7 +208,7 @@ public class ReservasDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	//VERIFICA STATUS DO CHECKOUT - RETORNA BOOLEANO
 	public static boolean verificaCheckoutReserva(String idFuncionario, String horaFinal) {
 		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL

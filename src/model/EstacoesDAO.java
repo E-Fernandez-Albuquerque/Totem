@@ -42,6 +42,7 @@ public class EstacoesDAO {
 	}
 	*/
 	
+	//FUNÇÃO PARA REGISTRAR UMA NOVA ESÇÃO
 	public static void inserirEstacaoMockada(String id) {
 		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
@@ -57,6 +58,8 @@ public class EstacoesDAO {
 		}
 	}
 	
+	//VERIFICA ESTAÇÕES LIVRES, RETORNANDO
+	//TROCAR 'PRINT' POR ARRAY
 	public static String verificarEstacoesLivres (String checkinDateTime) {
 		Connection connection = DBConnection.conectDB();
 		PreparedStatement statement = null;
