@@ -43,7 +43,7 @@ public class EstacoesDAO {
 	*/
 	
 	//FUNÇÃO PARA REGISTRAR UMA NOVA ESÇÃO
-	public static void inserirEstacaoMockada(String id) {
+	public static void inserirEstacao(String id) {
 		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 		
