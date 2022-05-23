@@ -20,11 +20,11 @@ public class teste_exec {
 		
 		//UsuariosDAO.inserirFuncionario("32112ARR", "Eric", "Desenvolvimento");
 		//EstacoesDAO.inserirEstacao("A22");
-		//ReservasDAO.inserirReserva(1, "A22", "2022-05-15 08:00:00", "2022-05-15 12:00:00", null, null, "32112ARR");
+		ReservasDAO.inserirReserva(1, "A22", "2022-05-15 08:00:00", "2022-05-15 12:00:00", null, null, "32112ARR");
 		
 		//ReservasDAO.fazerCheckin("32112ARR", "2022-05-15 08:00:00");
 		
-		
+		/*
 		while (true) {
 			Scanner sc = new Scanner (System.in);//INICIALIZA UM SCANNER PARA LEITURA DO ID
 		
@@ -57,6 +57,7 @@ public class teste_exec {
 				System.out.println("Usuário não identificado");
 			}
 		}
+		*/
 		
 		
 
