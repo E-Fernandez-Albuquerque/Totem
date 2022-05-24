@@ -3,6 +3,7 @@ package controller;
 import java.io.ObjectInputFilter.Status;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.Usuarios;
@@ -17,10 +18,10 @@ import model.ReservasDAO;
 public class teste_exec {
 
 	public static void main(String[] args) throws SQLException {
-		
+		//DBTables.criarTabelaReservas();
 		//UsuariosDAO.inserirFuncionario("32112ARR", "Eric", "Desenvolvimento");
 		//EstacoesDAO.inserirEstacao("A22");
-		ReservasDAO.inserirReserva(1, "A22", "2022-05-15 08:00:00", "2022-05-15 12:00:00", null, null, "32112ARR");
+		ReservasDAO.inserirReserva("A03", "2022-05-15 08:00:00", "2022-05-15 12:00:00", null, null, "32112ARR");
 		
 		//ReservasDAO.fazerCheckin("32112ARR", "2022-05-15 08:00:00");
 		
@@ -50,7 +51,9 @@ public class teste_exec {
 				} else {//CASO NÃO EXISTA RESERVA
 					System.out.println("Nenhuma reserva localizada para o usuário. Realize uma nova reserva.");
 					System.out.println("Estações livres: ");
-					EstacoesDAO.verificarEstacoesLivres(horaInicio);//PRINTA ESTAÇÕES LIVRES PARA O HORÁRIO ESPECIFICADO
+					ArrayList<String> estacoes = EstacoesDAO.verificarEstacoesLivres(horaInicio);//PRINTA ESTAÇÕES LIVRES PARA O HORÁRIO ESPECIFICADO
+					System.out.println(estacoes.getClass());
+					System.out.println(estacoes);
 					break;
 				}
 			} else {//CASO ID NÃO SEJA IDENTIFICADO
@@ -58,6 +61,7 @@ public class teste_exec {
 			}
 		}
 		*/
+		
 		
 		
 

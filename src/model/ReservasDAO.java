@@ -97,19 +97,18 @@ public class ReservasDAO {
 	}
 	*/
 	//FUNÇÃO QUE REGISTRA UMA NOVA RESERVA
-	public static void inserirReserva(int idReserva, String idEstacao, String dataHoraInicio, String dataHoraFim, String checkin, String checkout, String idFuncionario) {
+	public static void inserirReserva(String idEstacao, String dataHoraInicio, String dataHoraFim, String checkin, String checkout, String idFuncionario) {
 		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 		
 		try {
-			statement = connection.prepareStatement("INSERT INTO reservas (id_reserva, id_estacao, reserva_inicia_em, reserva_termina_em, check_in_em, check_out_em, id_funcionario) VALUES (?, ?, ?, ?, ?, ?, ?)");//COMANDO SQL
-			statement.setInt(1, idReserva);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
-			statement.setString(2, idEstacao);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
-			statement.setString(3, dataHoraInicio);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
-			statement.setString(4, dataHoraFim);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
-			statement.setString(5, checkin);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
-			statement.setString(6, checkout);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
-			statement.setString(7,idFuncionario);
+			statement = connection.prepareStatement("INSERT INTO reservas (id_estacao, reserva_inicia_em, reserva_termina_em, check_in_em, check_out_em, id_funcionario) VALUES (?, ?, ?, ?, ?, ?)");//COMANDO SQL
+			statement.setString(1, idEstacao);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.setString(2, dataHoraInicio);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.setString(3, dataHoraFim);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.setString(4, checkin);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.setString(5, checkout);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+			statement.setString(6,idFuncionario);
 			statement.executeUpdate();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
 		}catch (SQLException e){
 			e.printStackTrace();

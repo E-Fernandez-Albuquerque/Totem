@@ -2,18 +2,16 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import model.EstacoesDAO;
-
 import javax.swing.JLabel;
-import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
 
-public class teste4 extends JFrame {
+public class Concluido extends JFrame {
 
 	private JPanel contentPane;
 
@@ -23,43 +21,45 @@ public class teste4 extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				/*try {
-					teste4 frame = new teste4();
+				try {
+					Concluido frame = new Concluido();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				*/
 			}
 		});
 	}
 
 	/**
 	 * Create the frame.
+	 * @return 
 	 */
-	public teste4(String id) {
-		String horaInicio = "2022-05-15 08:00:00";
-		ArrayList<String> estacoes = EstacoesDAO.verificarEstacoesLivres(horaInicio);
+	
+	public TimerTask novaTela() {
+		Inicio screen = new Inicio();
+		screen.setVisible(true);
+		dispose();
+		return null;
+	}
+	
+	public Concluido() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 776, 430);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Reserva");
-		lblNewLabel.setBounds(30, 104, 184, 22);
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("src/img/concluido.gif"));
+		lblNewLabel.setBounds(0, 0, 760, 391);
 		contentPane.add(lblNewLabel);
-		
-		JComboBox<String> comboBox = new JComboBox();
-		comboBox.setBounds(193, 104, 231, 22);
-		contentPane.add(comboBox);
-		
-		int count = 0;
-		while(count < estacoes.size()) {
-			comboBox.addItem(estacoes.get(count));
-			count++;
-		}
+		int delay = 2500;
+		Timer timer = new Timer();
+		timer.schedule(novaTela(), delay);
+		dispose();
 	}
 
 }
+

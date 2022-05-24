@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.mysql.cj.protocol.Resultset;
 
 public class EstacoesDAO {
 	/*
@@ -60,21 +63,22 @@ public class EstacoesDAO {
 	
 	//VERIFICA ESTAÇÕES LIVRES, RETORNANDO
 	//TROCAR 'PRINT' POR ARRAY
-	public static String verificarEstacoesLivres (String checkinDateTime) {
+	public static ArrayList<String> verificarEstacoesLivres (String checkinDateTime) {
 		Connection connection = DBConnection.conectDB();
 		PreparedStatement statement = null;
 		ResultSet estacoesLivres;
+		ArrayList<String> estacoes = new ArrayList<>(1);
 		try {
 			statement = connection.prepareStatement("SELECT estacao FROM estacoes WHERE estacao NOT IN (SELECT id_estacao FROM reservas WHERE reserva_inicia_em = ?)");
 			statement.setString(1, checkinDateTime);
 			estacoesLivres = statement.executeQuery();
 			while (estacoesLivres.next()) {
-				System.out.println(estacoesLivres.getString("estacao"));
+				estacoes.add(estacoesLivres.getString("estacao"));
 			}
+			return estacoes;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return ("Erro durante  a verificação");
 		}
-		return "Fim";
+		return estacoes;
 	}
 }
