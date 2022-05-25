@@ -22,7 +22,7 @@ public class UsuariosDAO {
 			}
 		}
 		
-		public static String procurarFuncionario(String id) {
+		public static ResultSet procurarFuncionario(String id) {
 			Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 			PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 			ResultSet result;
@@ -31,7 +31,7 @@ public class UsuariosDAO {
 				statement.setString(1, id);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
 				result = statement.executeQuery();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
 				result.next();
-				return result.getString("id");
+				return result;
 			} catch (SQLException e) {
 				return null;
 			}

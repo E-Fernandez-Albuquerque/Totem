@@ -140,6 +140,7 @@ public class Reserva extends JFrame {
 				String horaSaida = (ftmData.getText() + " " + fmtHour.getText());
 				String idFuncionario = id;
 				String estacao = (String) comboBox.getSelectedItem();
+				System.out.println(idFuncionario);
 				ReservasDAO.inserirReserva(estacao, horaEntrada, horaSaida, null, null, idFuncionario);
 				
 				Inicio screen = new Inicio();

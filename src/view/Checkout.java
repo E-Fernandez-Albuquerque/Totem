@@ -12,9 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.ReservasDAO;
+import model.UsuariosDAO;
 
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class Checkout extends JFrame {
 
@@ -39,9 +43,24 @@ public class Checkout extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public Checkout(String id, String horaSaida) {
+	public Checkout(String id, String horaSaida, String horaInicio) throws SQLException {
 
+		ResultSet reserva = null;
+		try {
+			reserva = ReservasDAO.dadosReserva(id, horaInicio);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String entrada = reserva.getString("reserva_inicia_em");
+		String saida = reserva.getString("reserva_termina_em");
+		String estacao = reserva.getString("id_estacao");
+		ResultSet funcionario = UsuariosDAO.procurarFuncionario(id);
+		String nome = funcionario.getString("nome");
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 734, 480);
 		contentPane = new JPanel();
@@ -51,48 +70,27 @@ public class Checkout extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("SAÍDA");
+		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_1_1.setForeground(new Color(255, 102, 0));
 		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_1_1.setBounds(376, 128, 79, 32);
+		lblNewLabel_1_1_1.setBounds(314, 204, 79, 32);
 		contentPane.add(lblNewLabel_1_1_1);
 		
 		JLabel lblHoraDeEntrada_1 = new JLabel("ENTRADA");
+		lblHoraDeEntrada_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHoraDeEntrada_1.setForeground(new Color(255, 102, 0));
 		lblHoraDeEntrada_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblHoraDeEntrada_1.setBounds(179, 108, 98, 61);
+		lblHoraDeEntrada_1.setBounds(73, 190, 98, 61);
 		contentPane.add(lblHoraDeEntrada_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("DATA");
-		lblNewLabel_2.setForeground(new Color(255, 102, 0));
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_2.setBounds(52, 123, 79, 32);
-		contentPane.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel = new JLabel("DATA");
-		lblNewLabel.setForeground(new Color(204, 204, 204));
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setBounds(52, 130, 79, 25);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblHoraDeEntrada = new JLabel("ENTRADA");
-		lblHoraDeEntrada.setForeground(new Color(204, 204, 204));
-		lblHoraDeEntrada.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblHoraDeEntrada.setBounds(179, 111, 98, 58);
-		contentPane.add(lblHoraDeEntrada);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("SAÍDA");
-		lblNewLabel_1_1.setForeground(new Color(204, 204, 204));
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_1.setBounds(376, 123, 79, 44);
-		contentPane.add(lblNewLabel_1_1);
-		
 		JLabel lblNewLabel_1 = new JLabel("ESTAÇÃO");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setForeground(new Color(255, 102, 0));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(531, 113, 108, 50);
+		lblNewLabel_1.setBounds(548, 197, 108, 50);
 		contentPane.add(lblNewLabel_1);
 		
-		JButton btnNewButton = new JButton("CHECK-OUT");
+		JButton btnNewButton = new JButton("Check-out");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ReservasDAO.fazerCheckout(id, horaSaida);//REALIZA O CHECKOUT
@@ -104,7 +102,7 @@ public class Checkout extends JFrame {
 		btnNewButton.setFont(new Font("Segoe UI Black", Font.BOLD, 16));
 		btnNewButton.setBackground(new Color(255, 51, 0));
 		btnNewButton.setForeground(new Color(255, 102, 0));
-		btnNewButton.setBounds(324, 365, 131, 39);
+		btnNewButton.setBounds(285, 356, 131, 39);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
@@ -112,31 +110,50 @@ public class Checkout extends JFrame {
 		lblNewLabel_3.setBounds(10, 11, 115, 67);
 		contentPane.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("ESTAÇÃO");
-		lblNewLabel_1_2.setForeground(new Color(204, 204, 204));
-		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_2.setBounds(531, 108, 108, 64);
-		contentPane.add(lblNewLabel_1_2);
+		JLabel lbl_entrada = new JLabel("New label");
+		lbl_entrada.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_entrada.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lbl_entrada.setBounds(10, 265, 227, 36);
+		contentPane.add(lbl_entrada);
 		
-		JLabel lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		lblNewLabel_4.setBounds(43, 195, 82, 36);
-		contentPane.add(lblNewLabel_4);
+		JLabel lbl_saida = new JLabel("New label");
+		lbl_saida.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_saida.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lbl_saida.setBounds(247, 267, 207, 32);
+		contentPane.add(lbl_saida);
 		
-		JLabel lblNewLabel_4_1 = new JLabel("New label");
-		lblNewLabel_4_1.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		lblNewLabel_4_1.setBounds(183, 199, 82, 32);
-		contentPane.add(lblNewLabel_4_1);
+		JLabel lbl_estacao = new JLabel("New label");
+		lbl_estacao.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_estacao.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lbl_estacao.setBounds(501, 269, 195, 32);
+		contentPane.add(lbl_estacao);
 		
-		JLabel lblNewLabel_4_1_1 = new JLabel("New label");
-		lblNewLabel_4_1_1.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		lblNewLabel_4_1_1.setBounds(363, 199, 82, 32);
-		contentPane.add(lblNewLabel_4_1_1);
+		JButton btnNewButton_1 = new JButton("Cancelar");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Inicio screen = new Inicio();
+				screen.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton_1.setBounds(305, 407, 89, 23);
+		contentPane.add(btnNewButton_1);
 		
-		JLabel lblNewLabel_4_1_1_1 = new JLabel("New label");
-		lblNewLabel_4_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		lblNewLabel_4_1_1_1.setBounds(537, 199, 82, 32);
-		contentPane.add(lblNewLabel_4_1_1_1);
+		JLabel lbl_nome = new JLabel("Lbl nome");
+		lbl_nome.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lbl_nome.setBounds(52, 96, 432, 50);
+		contentPane.add(lbl_nome);
+		
+		lbl_estacao.setText(estacao);
+		lbl_entrada.setText(entrada);
+		lbl_saida.setText(saida);
+		lbl_nome.setText("Olá, " + nome);
+		
+		JLabel lblNewLabel = new JLabel("Check-out");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		lblNewLabel.setBounds(228, 22, 243, 32);
+		contentPane.add(lblNewLabel);
 	
 	}
 

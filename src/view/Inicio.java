@@ -18,7 +18,10 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class Inicio extends JFrame {
 
@@ -68,8 +71,17 @@ public class Inicio extends JFrame {
 		btn_confirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String id = textField_id.getText();
+				ResultSet user = UsuariosDAO.procurarFuncionario(id);
 				
-				id = UsuariosDAO.procurarFuncionario(id);//VERIFICA EXISTÊNCIA DO ID
+				try {
+					String nome = user.getString("nome");
+					id = user.getString("id");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
 				String horaInicio = "2022-05-15 08:00:00";
 				String horaSaida = "2022-05-15 12:00:00";
 				
@@ -79,15 +91,28 @@ public class Inicio extends JFrame {
 					boolean checkout = ReservasDAO.verificaCheckoutReserva(id, horaSaida);//VERIFICA EXISTÊNCIA DE CHECKOUT
 					if (reserva && !checkin && !checkout) {//SE EXISTIR APENAS RESERVA
 						System.out.println("Fazer checkin");
-						Checkin screen = new Checkin(id, horaInicio);
-						screen.setVisible(true);
-						dispose();
-					} else if (reserva && checkin && !checkout){//SE CHECKIN JÁ FOI REALIZADO
+						Checkin screen;
+						try {
+							screen = new Checkin(id, horaInicio);
+							screen.setVisible(true);
+							dispose();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						
+					} else if (reserva && checkin && !checkout){//SE CHECKIN JÁ FOI REALIZADO
 						System.out.println("Fazer checkout");
-						Checkout screen = new Checkout(id, horaSaida);
-						screen.setVisible(true);
-						dispose();
+						Checkout screen;
+						try {
+							screen = new Checkout(id, horaSaida, horaInicio);
+							screen.setVisible(true);
+							dispose();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
 					} else {//CASO NÃO EXISTA RESERVA
 						System.out.println("Nenhuma reserva localizada para o usuário. Realize uma nova reserva.");
 						System.out.println("Estações livres: ");
@@ -108,10 +133,11 @@ public class Inicio extends JFrame {
 		contentPane.add(btn_confirmar);
 		
 		textField_id = new JTextField();
+		textField_id.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_id.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_id.setBounds(182, 197, 185, 38);
 		contentPane.add(textField_id);
-		textField_id.setColumns(10);
+		textField_id.setColumns(8);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("src/img/WhatsApp Image 2022-05-23 at 18.38.07.jpeg"));

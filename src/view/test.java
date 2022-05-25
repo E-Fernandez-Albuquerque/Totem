@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 import model.UsuariosDAO;
@@ -57,7 +59,14 @@ public class test extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String id = textField.getText();
 				
-				id = UsuariosDAO.procurarFuncionario(id);//VERIFICA EXISTÊNCIA DO ID
+				ResultSet funcionario = UsuariosDAO.procurarFuncionario(id);
+				try {
+					id = funcionario.getString("id");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				//VERIFICA EXISTÊNCIA DO ID
 				String horaInicio = "2022-05-15 08:00:00";
 				String horaSaida = "2022-05-15 12:00:00";
 				

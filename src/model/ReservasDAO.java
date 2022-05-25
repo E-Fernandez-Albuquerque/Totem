@@ -108,7 +108,7 @@ public class ReservasDAO {
 			statement.setString(3, dataHoraFim);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
 			statement.setString(4, checkin);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
 			statement.setString(5, checkout);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
-			statement.setString(6,idFuncionario);
+			statement.setString(6, idFuncionario);
 			statement.executeUpdate();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
 		}catch (SQLException e){
 			e.printStackTrace();
@@ -197,10 +197,9 @@ public class ReservasDAO {
 			String checkout = result.getString("check_out_em");
 			String horaFinal = result.getString("reserva_termina_em");
 			if (checkout == null) {
-				statement = connection.prepareStatement("UPDATE reservas SET check_out_em = ? WHERE id_funcionario = ? AND reserva_termina_em = ?");//COMANDO SQL
-				statement.setString(1, horaFinal);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
-				statement.setString(2, id);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
-				statement.setString(3, horaSaida);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+				statement = connection.prepareStatement("DELETE FROM reservas WHERE id_funcionario = ? AND reserva_termina_em = ?");//COMANDO SQL
+				statement.setString(1, id);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
+				statement.setString(2, horaSaida);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
 				statement.executeUpdate();
 			}
 		} catch (SQLException e){
@@ -230,5 +229,25 @@ public class ReservasDAO {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public static ResultSet dadosReserva(String idFuncionario, String horaInicio) {
+		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
+		ResultSet reserva;
+		
+		try {
+			statement = connection.prepareStatement("SELECT * FROM reservas WHERE id_funcionario = ? AND reserva_inicia_em = ?");
+			statement.setString(1, idFuncionario);
+			statement.setString(2, horaInicio);
+			reserva = statement.executeQuery();
+			reserva.next();
+			if (reserva != null) {
+				return reserva;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
