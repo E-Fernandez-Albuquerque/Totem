@@ -75,13 +75,13 @@ public class test extends JFrame {
 					boolean checkin = ReservasDAO.verificaCheckinReserva(id, horaInicio);//VERIFICA EXISTÊNCIA DE CHECKIN
 					boolean checkout = ReservasDAO.verificaCheckoutReserva(id, horaSaida);//VERIFICA EXISTÊNCIA DE CHECKOUT
 					if (reserva && !checkin && !checkout) {//SE EXISTIR APENAS RESERVA
-						ReservasDAO.fazerCheckin(id, horaInicio);//REALIZA O CHECKIN
+						//ReservasDAO.fazerCheckin(id, horaInicio);//REALIZA O CHECKIN
 						System.out.println("Fazer checkin");
 						teste2 screen = new teste2(id);
 						screen.setVisible(true);
 						dispose();
 					} else if (reserva && checkin && !checkout){//SE CHECKIN JÁ FOI REALIZADO
-						ReservasDAO.fazerCheckout(id, horaSaida);//REALIZA O CHECKOUT
+						//ReservasDAO.fazerCheckout(id, horaSaida);//REALIZA O CHECKOUT
 						System.out.println("Fazer checkout");
 						teste3 screen = new teste3(id);
 						screen.setVisible(true);

@@ -6,6 +6,7 @@ import javax.swing.text.MaskFormatter;
 
 import model.EstacoesDAO;
 import model.ReservasDAO;
+import model.UsuariosDAO;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,8 +15,12 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
@@ -53,8 +58,9 @@ public class Reserva extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public Reserva(String id, String horaInicio) {
+	public Reserva(String id, String data, String horaInicio) throws SQLException {
 		ArrayList<String> estacoes = EstacoesDAO.verificarEstacoesLivres(horaInicio);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 735, 480);
@@ -62,101 +68,109 @@ public class Reserva extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		ResultSet funcionario = UsuariosDAO.procurarFuncionario(id);
+		String nome = funcionario.getString("nome");
+		//MASK
+		MaskFormatter fmtDataMask = null;
+		try {
+			fmtDataMask = new MaskFormatter("####-##-##");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		
+		MaskFormatter fmtHourMask = null;	
+				
+		try {
+			fmtHourMask = new MaskFormatter("##:##");
+		} catch (ParseException e2) {
+			e2.printStackTrace();
+		}
+		MaskFormatter fmtHourMask2 = null;	
+		try {
+			fmtHourMask2 = new MaskFormatter("##:##:##");
+		} catch (ParseException e3) {
+		e3.printStackTrace();
+					
+		}
+		
+		
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255,255,255,215));
+		panel.setBounds(51, 59, 617, 342);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lbl_nome = new JLabel("Olá, ");
+		lbl_nome.setBounds(0, 11, 617, 35);
+		panel.add(lbl_nome);
+		lbl_nome.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_nome.setFont(new Font("Tahoma", Font.BOLD, 25));
+		
+		lbl_nome.setText("Olá, " + nome + "!");
+		
+		
+		JLabel lbl_horario = new JLabel("Você chegou às <dynamic>. Por favor, defina o horário de término da sua reserva.");
+		lbl_horario.setBounds(0, 71, 617, 35);
+		panel.add(lbl_horario);
+		lbl_horario.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_horario.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		lbl_horario.setText("Você chegou às " + horaInicio + ". Por favor, defina o horário de término da sua reserva.");
+		
+		JLabel lbl_info = new JLabel("Em seguida, defina a estação de deseja utilizar.");
+		lbl_info.setBounds(0, 113, 617, 35);
+		panel.add(lbl_info);
+		lbl_info.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_info.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		JLabel lblNewLabel_1_1_1_1 = new JLabel("Horario de saída:");
+		lblNewLabel_1_1_1_1.setBounds(115, 179, 202, 34);
+		panel.add(lblNewLabel_1_1_1_1);
+		lblNewLabel_1_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_1_1_1_1.setForeground(new Color(255, 51, 0));
+		lblNewLabel_1_1_1_1.setFont(new Font("Segoe UI", Font.PLAIN, 25));
+		JFormattedTextField fmtHour = new JFormattedTextField(fmtHourMask);
+		fmtHour.setBounds(327, 179, 99, 35);
+		panel.add(fmtHour);
+		fmtHour.setHorizontalAlignment(SwingConstants.CENTER);
+		fmtHour.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
 		
 		JLabel lblNewLabel_1_1_2_1_1 = new JLabel("Estações livres:");
+		lblNewLabel_1_1_2_1_1.setBounds(88, 224, 229, 35);
+		panel.add(lblNewLabel_1_1_2_1_1);
 		lblNewLabel_1_1_2_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_2_1_1.setForeground(Color.GRAY);
-		lblNewLabel_1_1_2_1_1.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		lblNewLabel_1_1_2_1_1.setBounds(135, 245, 229, 35);
-		contentPane.add(lblNewLabel_1_1_2_1_1);
-		//MASK
-		MaskFormatter fmtDataMask = null;
-				try {
-					fmtDataMask = new MaskFormatter("####-##-##");
-				} catch (ParseException e1) {
-					e1.printStackTrace();
-					
-				}
-		JFormattedTextField ftmData = new JFormattedTextField(fmtDataMask);
-		ftmData.setHorizontalAlignment(SwingConstants.CENTER);
-		ftmData.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		ftmData.setBounds(374, 107, 99, 35);
-		contentPane.add(ftmData);
+		lblNewLabel_1_1_2_1_1.setForeground(new Color(255, 51, 0));
+		lblNewLabel_1_1_2_1_1.setFont(new Font("Segoe UI", Font.PLAIN, 25));
 		
-				MaskFormatter fmtHourMask = null;	
-				
-				try {
-					fmtHourMask = new MaskFormatter("##:##:##");
-				} catch (ParseException e2) {
-					e2.printStackTrace();
-					
-				}
-				MaskFormatter fmtHourMask2 = null;	
-				try {
-					fmtHourMask2 = new MaskFormatter("##:##:##");
-				} catch (ParseException e3) {
-					e3.printStackTrace();
-					
-				}
-		JFormattedTextField fmtHour = new JFormattedTextField(fmtHourMask);
-		fmtHour.setHorizontalAlignment(SwingConstants.CENTER);
-		fmtHour.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		fmtHour.setBounds(374, 199, 99, 35);
-		contentPane.add(fmtHour);
-		
-		JFormattedTextField ftmHour2= new JFormattedTextField(fmtHourMask2);
-		ftmHour2.setHorizontalAlignment(SwingConstants.CENTER);
-		ftmHour2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		ftmHour2.setBounds(374, 153, 99, 35);
-		contentPane.add(ftmHour2);
-				
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(374, 245, 99, 35);
-		contentPane.add(comboBox);
-		
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("Horario de saída:");
-		lblNewLabel_1_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_1_1.setForeground(Color.GRAY);
-		lblNewLabel_1_1_1_1.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		lblNewLabel_1_1_1_1.setBounds(162, 199, 202, 34);
-		contentPane.add(lblNewLabel_1_1_1_1);
-		
-		JLabel lblNewLabel_1_1_2 = new JLabel("Horario de entrada:");
-		lblNewLabel_1_1_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_2.setForeground(Color.GRAY);
-		lblNewLabel_1_1_2.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		lblNewLabel_1_1_2.setBounds(135, 155, 229, 31);
-		contentPane.add(lblNewLabel_1_1_2);
+		comboBox.setBounds(327, 224, 99, 35);
+		panel.add(comboBox);
 		
 		JButton btnNewButton = new JButton("Confirmar");
+		btnNewButton.setBounds(241, 303, 135, 31);
+		panel.add(btnNewButton);
 		btnNewButton.setBackground(new Color(255, 51, 0));
-		btnNewButton.setForeground(new Color(255, 102, 0));
+		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setFont(new Font("Segoe UI Historic", Font.BOLD, 11));
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String data = ftmData.getText();
-				String horaEntrada = (ftmData.getText() + " " + ftmHour2.getText());
-				String horaSaida = (ftmData.getText() + " " + fmtHour.getText());
+				//String data = ftmData.getText();
+				String horaSaida = (fmtHour.getText());
+				
 				String idFuncionario = id;
 				String estacao = (String) comboBox.getSelectedItem();
 				System.out.println(idFuncionario);
-				ReservasDAO.inserirReserva(estacao, horaEntrada, horaSaida, null, null, idFuncionario);
+				ReservasDAO.inserirReserva(estacao, data, horaInicio, horaSaida, null, null, idFuncionario);
+				ReservasDAO.fazerCheckin(id, data, horaInicio);
 				
-				Inicio screen = new Inicio();
+				Concluido screen = new Concluido();
 				screen.setVisible(true);
 				dispose();
 			}
 		});
-		
-		JLabel lblNewLabel_1_2 = new JLabel("Data:");
-		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_2.setForeground(Color.GRAY);
-		lblNewLabel_1_2.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		lblNewLabel_1_2.setBounds(265, 109, 99, 31);
-		contentPane.add(lblNewLabel_1_2);
-		btnNewButton.setBounds(540, 355, 135, 31);
-		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("src/img/WhatsApp Image 2022-05-23 at 18.38.07.jpeg"));

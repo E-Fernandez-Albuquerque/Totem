@@ -18,10 +18,12 @@ import model.ReservasDAO;
 public class teste_exec {
 
 	public static void main(String[] args) throws SQLException {
+		
+		DBTables.criarTabelaReservas();
 		//DBTables.criarTabelaReservas();
 		//UsuariosDAO.inserirFuncionario("32112ARR", "Eric", "Desenvolvimento");
 		//EstacoesDAO.inserirEstacao("A22");
-		ReservasDAO.inserirReserva("A03", "2022-05-15 08:00:00", "2022-05-15 12:00:00", null, null, "32112ARR");
+		//ReservasDAO.inserirReserva("A03", "2022-05-15 08:00:00", "2022-05-15 12:00:00", null, null, "32112ARR");
 		
 		//ReservasDAO.fazerCheckin("32112ARR", "2022-05-15 08:00:00");
 		

@@ -10,6 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Concluido extends JFrame {
 
@@ -36,30 +39,29 @@ public class Concluido extends JFrame {
 	 * @return 
 	 */
 	
-	public TimerTask novaTela() {
-		Inicio screen = new Inicio();
-		screen.setVisible(true);
-		dispose();
-		return null;
-	}
-	
 	public Concluido() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 776, 430);
+		setBounds(100, 100, 776, 492);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JButton btnNewButton = new JButton("Ok!");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Inicio screen = new Inicio();
+				screen.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton.setBounds(336, 419, 89, 23);
+		contentPane.add(btnNewButton);
+		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("src/img/concluido.gif"));
-		lblNewLabel.setBounds(0, 0, 760, 391);
+		lblNewLabel.setBounds(0, 11, 760, 391);
 		contentPane.add(lblNewLabel);
-		int delay = 2500;
-		Timer timer = new Timer();
-		timer.schedule(novaTela(), delay);
-		dispose();
 	}
-
 }
 

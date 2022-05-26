@@ -20,6 +20,14 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
@@ -37,6 +45,7 @@ public class Inicio extends JFrame {
 				try {
 					Inicio frame = new Inicio();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,21 +64,27 @@ public class Inicio extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("INSIRA SEU ID");
-		lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1_1.setFont(new Font("Segoe UI Black", Font.BOLD, 20));
-		lblNewLabel_1_1.setBounds(197, 134, 154, 70);
-		contentPane.add(lblNewLabel_1_1);
+		Scanner sc = new Scanner(System.in);
 		
-		JLabel lblNewLabel_1 = new JLabel("INSIRA SEU ID");
-		lblNewLabel_1.setForeground(new Color(153, 153, 153));
-		lblNewLabel_1.setFont(new Font("Segoe UI Black", Font.BOLD, 20));
-		lblNewLabel_1.setBounds(197, 148, 154, 38);
-		contentPane.add(lblNewLabel_1);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255,255,255,220));
+		panel.setBounds(139, 128, 291, 174);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
 		JButton btn_confirmar = new JButton("Confirmar");
+		btn_confirmar.setBounds(89, 115, 112, 38);
+		panel.add(btn_confirmar);
 		btn_confirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//String horaInicio = "2022-05-15 08:00:00";
+				String horaSaida = "22:00";
+				Date data = new Date();
+				SimpleDateFormat fmtdData = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat fmtdHora = new SimpleDateFormat("HH:mm");
+				String dataAtual = fmtdData.format(data);
+				String horaAtual = fmtdHora.format(data);
+				
 				String id = textField_id.getText();
 				ResultSet user = UsuariosDAO.procurarFuncionario(id);
 				
@@ -81,19 +96,16 @@ public class Inicio extends JFrame {
 					e1.printStackTrace();
 				}
 				
-				
-				String horaInicio = "2022-05-15 08:00:00";
-				String horaSaida = "2022-05-15 12:00:00";
-				
 				if (id != null) {//CASO O ID NÃO SEJA NULO
-					boolean reserva = ReservasDAO.verificaReserva(id, horaInicio);//VERIFICA EXISTÊNCIA DE RESERVA
-					boolean checkin = ReservasDAO.verificaCheckinReserva(id, horaInicio);//VERIFICA EXISTÊNCIA DE CHECKIN
-					boolean checkout = ReservasDAO.verificaCheckoutReserva(id, horaSaida);//VERIFICA EXISTÊNCIA DE CHECKOUT
+					boolean reserva = ReservasDAO.verificaReserva(id, dataAtual);//VERIFICA EXISTÊNCIA DE RESERVA
+					boolean checkin = ReservasDAO.verificaCheckinReserva(id, dataAtual);//VERIFICA EXISTÊNCIA DE CHECKIN
+					boolean checkout = ReservasDAO.verificaCheckoutReserva(id, dataAtual);//VERIFICA EXISTÊNCIA DE CHECKOUT
 					if (reserva && !checkin && !checkout) {//SE EXISTIR APENAS RESERVA
 						System.out.println("Fazer checkin");
 						Checkin screen;
 						try {
-							screen = new Checkin(id, horaInicio);
+							screen = new Checkin(id, dataAtual, horaAtual);
+							screen.setResizable(false);
 							screen.setVisible(true);
 							dispose();
 						} catch (SQLException e1) {
@@ -105,7 +117,8 @@ public class Inicio extends JFrame {
 						System.out.println("Fazer checkout");
 						Checkout screen;
 						try {
-							screen = new Checkout(id, horaSaida, horaInicio);
+							screen = new Checkout(id, dataAtual, horaAtual);
+							screen.setResizable(false);
 							screen.setVisible(true);
 							dispose();
 						} catch (SQLException e1) {
@@ -117,9 +130,17 @@ public class Inicio extends JFrame {
 						System.out.println("Nenhuma reserva localizada para o usuário. Realize uma nova reserva.");
 						System.out.println("Estações livres: ");
 						System.out.println("Redirecionar para tela Reserva");
-						Reserva screen = new Reserva(id, horaInicio);
-						screen.setVisible(true);
-						dispose();
+						Reserva screen;
+						try {
+							screen = new Reserva(id, dataAtual, horaAtual);
+							screen.setResizable(false);
+							screen.setVisible(true);
+							dispose();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
 					}
 				} else {//CASO ID NÃO SEJA IDENTIFICADO
 					System.out.println("Usuário não identificado");
@@ -127,23 +148,28 @@ public class Inicio extends JFrame {
 			}
 		});
 		btn_confirmar.setBackground(new Color(255, 51, 0));
-		btn_confirmar.setForeground(new Color(255, 102, 0));
+		btn_confirmar.setForeground(Color.WHITE);
 		btn_confirmar.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btn_confirmar.setBounds(218, 246, 112, 38);
-		contentPane.add(btn_confirmar);
 		
 		textField_id = new JTextField();
+		textField_id.setBounds(55, 66, 185, 38);
+		panel.add(textField_id);
 		textField_id.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_id.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textField_id.setBounds(182, 197, 185, 38);
-		contentPane.add(textField_id);
 		textField_id.setColumns(8);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Insira o seu ID");
+		lblNewLabel_1_1.setBounds(34, 0, 219, 70);
+		panel.add(lblNewLabel_1_1);
+		lblNewLabel_1_1.setBackground(Color.WHITE);
+		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1.setForeground(new Color(255,51,0));
+		lblNewLabel_1_1.setFont(new Font("Segoe UI Black", Font.BOLD, 23));
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("src/img/WhatsApp Image 2022-05-23 at 18.38.07.jpeg"));
 		lblNewLabel.setBounds(0, 0, 549, 419);
 		contentPane.add(lblNewLabel);
 	}
-
 }
 

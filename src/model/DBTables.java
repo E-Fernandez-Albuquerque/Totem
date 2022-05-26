@@ -45,9 +45,10 @@ public class DBTables {
 		try {
 			statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS reservas "
 					+ "(id_reserva int PRIMARY KEY AUTO_INCREMENT,"
-					+ "id_estacao varchar(6)," //OBS
-					+ "reserva_inicia_em varchar(19),"
-					+ "reserva_termina_em varchar(19),"
+					+ "id_estacao varchar(6),"
+					+ "data varchar(10)," //OBS
+					+ "reserva_inicia_em varchar(8),"
+					+ "reserva_termina_em varchar(8),"
 					+ "check_in_em varchar(19),"
 					+ "check_out_em varchar(19),"
 					+ "id_funcionario varchar(8),"
