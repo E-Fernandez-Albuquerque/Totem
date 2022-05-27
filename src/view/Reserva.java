@@ -61,7 +61,7 @@ public class Reserva extends JFrame {
 	 * @throws SQLException 
 	 */
 	public Reserva(String id, String data, String horaInicio) throws SQLException {
-		ArrayList<String> estacoes = EstacoesDAO.verificarEstacoesLivres(horaInicio);
+		ArrayList<String> estacoes = EstacoesDAO.verificarEstacoesLivres(data);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 735, 480);
 		contentPane = new JPanel();
@@ -111,7 +111,7 @@ public class Reserva extends JFrame {
 		
 		
 		JLabel lbl_horario = new JLabel("Você chegou às <dynamic>. Por favor, defina o horário de término da sua reserva.");
-		lbl_horario.setBounds(0, 71, 617, 35);
+		lbl_horario.setBounds(10, 57, 617, 35);
 		panel.add(lbl_horario);
 		lbl_horario.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_horario.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -119,7 +119,7 @@ public class Reserva extends JFrame {
 		lbl_horario.setText("Você chegou às " + horaInicio + ". Por favor, defina o horário de término da sua reserva.");
 		
 		JLabel lbl_info = new JLabel("Em seguida, defina a estação de deseja utilizar.");
-		lbl_info.setBounds(0, 113, 617, 35);
+		lbl_info.setBounds(10, 99, 617, 35);
 		panel.add(lbl_info);
 		lbl_info.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_info.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -149,11 +149,30 @@ public class Reserva extends JFrame {
 		panel.add(comboBox);
 		
 		JButton btnNewButton = new JButton("Confirmar");
-		btnNewButton.setBounds(241, 303, 135, 31);
+		btnNewButton.setBounds(291, 300, 135, 31);
 		panel.add(btnNewButton);
 		btnNewButton.setBackground(new Color(255, 51, 0));
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setFont(new Font("Segoe UI Historic", Font.BOLD, 11));
+		
+		JButton btnNewButton_1 = new JButton("Cancelar");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Inicio screen = new Inicio();
+				screen.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton_1.setBounds(178, 304, 89, 23);
+		panel.add(btnNewButton_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("Infelizmente estamos sem estações disponíveis. Tente novamente mais tarde.");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_1.setForeground(Color.RED);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(0, 159, 617, 14);
+		panel.add(lblNewLabel_1);
+		lblNewLabel_1.setVisible(false);
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -178,9 +197,20 @@ public class Reserva extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		int count = 0;
-		while(count < estacoes.size()) {
+		System.out.println(estacoes.size());
+		if (estacoes.size() == 0) {
+			comboBox.setEnabled(false);
+			btnNewButton.setEnabled(false);
+			fmtHour.setEnabled(false);
+			btnNewButton.setBackground(new Color(200, 200, 200));
+			lblNewLabel_1.setVisible(true);
+			
+		} else {
+			while(count < estacoes.size()) {
 			comboBox.addItem(estacoes.get(count));
 			count++;
+			}
 		}
+		
 	}
 }

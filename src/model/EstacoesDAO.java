@@ -63,14 +63,14 @@ public class EstacoesDAO {
 	
 	//VERIFICA ESTAÇÕES LIVRES, RETORNANDO
 	//TROCAR 'PRINT' POR ARRAY
-	public static ArrayList<String> verificarEstacoesLivres (String checkinDateTime) {
+	public static ArrayList<String> verificarEstacoesLivres (String data) {
 		Connection connection = DBConnection.conectDB();
 		PreparedStatement statement = null;
 		ResultSet estacoesLivres;
 		ArrayList<String> estacoes = new ArrayList<>(1);
 		try {
-			statement = connection.prepareStatement("SELECT estacao FROM estacoes WHERE estacao NOT IN (SELECT id_estacao FROM reservas WHERE reserva_inicia_em = ?)");
-			statement.setString(1, checkinDateTime);
+			statement = connection.prepareStatement("SELECT estacao FROM estacoes WHERE estacao NOT IN (SELECT id_estacao FROM reservas WHERE data = ?)");
+			statement.setString(1, data);
 			estacoesLivres = statement.executeQuery();
 			while (estacoesLivres.next()) {
 				estacoes.add(estacoesLivres.getString("estacao"));

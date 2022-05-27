@@ -18,6 +18,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -34,7 +35,6 @@ import javax.swing.SwingConstants;
 public class Inicio extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField_id;
 
 	/**
 	 * Launch the application.
@@ -68,35 +68,75 @@ public class Inicio extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255,255,255,220));
-		panel.setBounds(139, 128, 291, 174);
+		panel.setBounds(67, 185, 414, 91);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JButton btn_confirmar = new JButton("Confirmar");
-		btn_confirmar.setBounds(89, 115, 112, 38);
-		panel.add(btn_confirmar);
-		btn_confirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JLabel lblNewLabel_1_1 = new JLabel("Aproxime o seu crachá");
+		lblNewLabel_1_1.setBounds(0, 11, 414, 70);
+		panel.add(lblNewLabel_1_1);
+		lblNewLabel_1_1.setBackground(Color.WHITE);
+		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1.setForeground(new Color(255,51,0));
+		lblNewLabel_1_1.setFont(new Font("Segoe UI Black", Font.BOLD, 25));
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("src/img/WhatsApp Image 2022-05-23 at 18.38.07.jpeg"));
+		lblNewLabel.setBounds(0, 0, 549, 419);
+		contentPane.add(lblNewLabel);
+		
+		this.addKeyListener(new java.awt.event.KeyAdapter() {
+			  public void keyPressed(java.awt.event.KeyEvent evt) {
 				//String horaInicio = "2022-05-15 08:00:00";
-				String horaSaida = "22:00";
-				Date data = new Date();
-				SimpleDateFormat fmtdData = new SimpleDateFormat("yyyy-MM-dd");
-				SimpleDateFormat fmtdHora = new SimpleDateFormat("HH:mm");
-				String dataAtual = fmtdData.format(data);
-				String horaAtual = fmtdHora.format(data);
-				
-				String id = textField_id.getText();
-				ResultSet user = UsuariosDAO.procurarFuncionario(id);
-				
-				try {
-					String nome = user.getString("nome");
+					String horaSaida = "22:00";
+					Date data = new Date();
+					SimpleDateFormat fmtdData = new SimpleDateFormat("yyyy-MM-dd");
+					SimpleDateFormat fmtdHora = new SimpleDateFormat("HH:mm");
+					String dataAtual = fmtdData.format(data);
+					String horaAtual = fmtdHora.format(data);
+					ResultSet user = null;
+					String id = null;
+					String nome = null;
+					
+			    if (evt.getKeyCode() == KeyEvent.VK_Q) {
+			    	id = "ASDFGHJK";
+					user = UsuariosDAO.procurarFuncionario(id);
+			    } else if (evt.getKeyCode() == KeyEvent.VK_W) {
+			    	id = "PLKMNFRX";
+					user = UsuariosDAO.procurarFuncionario(id);
+			    } else if (evt.getKeyCode() == KeyEvent.VK_E) {
+			    	id = "POIUYTRE";
+					user = UsuariosDAO.procurarFuncionario(id);
+			    } else if (evt.getKeyCode() == KeyEvent.VK_R) {
+			    	id = "QAZXSWED";
+					user = UsuariosDAO.procurarFuncionario(id);
+			    } else if (evt.getKeyCode() == KeyEvent.VK_T) {
+			    	id = "QWERTYUI";
+					user = UsuariosDAO.procurarFuncionario(id);
+			    } else if (evt.getKeyCode() == KeyEvent.VK_Y) {
+			    	id = "UJVESLO1";
+					user = UsuariosDAO.procurarFuncionario(id);
+			    } else if (evt.getKeyCode() == KeyEvent.VK_U) {
+			    	id = "VFRTGBNJ";
+					user = UsuariosDAO.procurarFuncionario(id);
+			    } else if (evt.getKeyCode() == KeyEvent.VK_I) {
+			    	id = "YFGVSQZA";
+					user = UsuariosDAO.procurarFuncionario(id);
+			    } else if (evt.getKeyCode() == KeyEvent.VK_O) {
+			    	id = "ZXCVBNMP";
+					user = UsuariosDAO.procurarFuncionario(id);
+			    } else {
+			    	System.out.println("Usuário não identificado.");
+			    }
+			    try {
+					nome = user.getString("nome");
 					id = user.getString("id");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				if (id != null) {//CASO O ID NÃO SEJA NULO
+			    
+			    if (id != null) {//CASO O ID NÃO SEJA NULO
 					boolean reserva = ReservasDAO.verificaReserva(id, dataAtual);//VERIFICA EXISTÊNCIA DE RESERVA
 					boolean checkin = ReservasDAO.verificaCheckinReserva(id, dataAtual);//VERIFICA EXISTÊNCIA DE CHECKIN
 					boolean checkout = ReservasDAO.verificaCheckoutReserva(id, dataAtual);//VERIFICA EXISTÊNCIA DE CHECKOUT
@@ -145,31 +185,9 @@ public class Inicio extends JFrame {
 				} else {//CASO ID NÃO SEJA IDENTIFICADO
 					System.out.println("Usuário não identificado");
 				}
-			}
-		});
-		btn_confirmar.setBackground(new Color(255, 51, 0));
-		btn_confirmar.setForeground(Color.WHITE);
-		btn_confirmar.setFont(new Font("Tahoma", Font.BOLD, 13));
-		
-		textField_id = new JTextField();
-		textField_id.setBounds(55, 66, 185, 38);
-		panel.add(textField_id);
-		textField_id.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_id.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textField_id.setColumns(8);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("Insira o seu ID");
-		lblNewLabel_1_1.setBounds(34, 0, 219, 70);
-		panel.add(lblNewLabel_1_1);
-		lblNewLabel_1_1.setBackground(Color.WHITE);
-		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1.setForeground(new Color(255,51,0));
-		lblNewLabel_1_1.setFont(new Font("Segoe UI Black", Font.BOLD, 23));
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("src/img/WhatsApp Image 2022-05-23 at 18.38.07.jpeg"));
-		lblNewLabel.setBounds(0, 0, 549, 419);
-		contentPane.add(lblNewLabel);
+			    
+			  }
+			});
 	}
 }
 
