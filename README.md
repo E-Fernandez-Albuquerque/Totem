@@ -12,7 +12,7 @@ Tecnologia de desenvolvimento: JAVA (JDK 18.0.1.1)
 
 2 - Banco de dados: MariaDB ou MySQL. Durante o desenvolvimento foi utilizado o MariaDB [https://mariadb.org/download/?t=mariadb&p=mariadb&r=10.6.8&os=windows&cpu=x86_64&pkg=msi&m=fder]
 
-3 - JDBC para conexão entre aplicação Java e o Banco de Dados: JDBC (8.0.28) para o sistema Microsoft Windows [https://dev.mysql.com/downloads/connector/j/]
+3 - JDBC para conexão entre aplicação Java e o Banco de Dados: JDBC (8.0.28) para o sistema Microsoft Windows (Platform Independent) [https://downloads.mysql.com/archives/c-j/]
 
 ## Configurações necessárias
 
