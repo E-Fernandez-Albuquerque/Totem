@@ -36,9 +36,11 @@ Tecnologia de desenvolvimento: JAVA (JDK 18.0.1.1)
 
 ​		3.0.2 - Em `PWD`, verificar a senha;
 
-4 - Executar a aplicação a partir da tela inicial (`Totem/src/view/Inicio.java`);
+4 - Existe a possibilidade de falha na classe "DBConnection", sendo necessário renomea-la para o correto funcionamento da aplicação. Para renomear: Clique com o botão direito sobre a classe "dbConnection" > Refactor > Rename..., e renomear para "DBConnection";
 
-5 - Após a primeira execução, recomenda-se teclar "Enter" para geração do banco de dados com valores previamente preenchidos com os participantes do desenvolvimento do projeto, caso contrário, o sistema não identificará nenhum "funcionário", permanecendo na tela inicial;
+5 - Executar a aplicação a partir da tela inicial (`Totem/src/view/Inicio.java`);
 
-6 - Os "IDs" registrados estarão nas teclas [Q, W, E, R, T, Y, U, I, O];
+6 - Após a primeira execução, recomenda-se teclar "Enter" para geração do banco de dados com valores previamente preenchidos com os participantes do desenvolvimento do projeto, caso contrário, o sistema não identificará nenhum "funcionário", permanecendo na tela inicial;
+
+7 - Os "IDs" registrados estarão nas teclas [Q, W, E, R, T, Y, U, I, O];
 
