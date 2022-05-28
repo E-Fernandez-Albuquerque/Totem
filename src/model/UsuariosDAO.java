@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class UsuariosDAO {
 
 		public static void inserirFuncionario(String id, String nome, String time) {
-			Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+			Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 			PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 			
 			try {
@@ -23,7 +23,7 @@ public class UsuariosDAO {
 		}
 		
 		public static ResultSet procurarFuncionario(String id) {
-			Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+			Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 			PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 			ResultSet result;
 			try {

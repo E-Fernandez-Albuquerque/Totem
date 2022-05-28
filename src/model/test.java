@@ -4,7 +4,7 @@ package model;
 public class test {
 
 	public static void main(String[] args) {
-		DBConnection.conectDB();
+		DBConnection.conectaDB();
 		DBTables.criarTabelaFuncionarios();
 		DBTables.criarTabelaEstacoes();
 		DBTables.criarTabelaReservas();

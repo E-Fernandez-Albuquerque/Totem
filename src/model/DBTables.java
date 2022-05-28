@@ -6,10 +6,31 @@ import java.sql.SQLException;
 
 //CLASSE RESPONSÁVEL POR CRIAR AS TABELAS GENÉRICAS 
 public class DBTables {
+	public static void criarDB(String nomeBD){
+		Connection connection = DBConnection.conectaDB();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement("CREATE DATABASE IF NOT EXISTS " + nomeBD);
+			statement.executeUpdate();
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public static void useDB() {
+		Connection connection = DBConnection.conectaDB();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement("USE cesar2");
+			statement.executeUpdate();
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+	}
 
 	//TABELA DE USUÁRIOS
 	public static void criarTabelaFuncionarios() {
-		Connection connection = DBConnection.conectDB();
+		Connection connection = DBConnection.conectaDB();
 		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS funcionarios "
@@ -23,7 +44,7 @@ public class DBTables {
 	
 	//TABELA DE ESTAÇÕES
 	public static void criarTabelaEstacoes() {
-		Connection connection = DBConnection.conectDB();
+		Connection connection = DBConnection.conectaDB();
 		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS estacoes "
@@ -40,7 +61,7 @@ public class DBTables {
 	
 	//TABELA DE RESERVAS
 	public static void criarTabelaReservas() {
-		Connection connection = DBConnection.conectDB();
+		Connection connection = DBConnection.conectaDB();
 		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS reservas "

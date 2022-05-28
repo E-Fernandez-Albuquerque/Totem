@@ -47,7 +47,7 @@ public class EstacoesDAO {
 	
 	//FUNÇÃO PARA REGISTRAR UMA NOVA ESÇÃO
 	public static void inserirEstacao(String id) {
-		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 		
 		//COMANDOS SQL
@@ -64,7 +64,7 @@ public class EstacoesDAO {
 	//VERIFICA ESTAÇÕES LIVRES, RETORNANDO
 	//TROCAR 'PRINT' POR ARRAY
 	public static ArrayList<String> verificarEstacoesLivres (String data) {
-		Connection connection = DBConnection.conectDB();
+		Connection connection = DBConnection.conectaDB();
 		PreparedStatement statement = null;
 		ResultSet estacoesLivres;
 		ArrayList<String> estacoes = new ArrayList<>(1);

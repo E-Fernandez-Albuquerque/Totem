@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.DadosPadrao;
+import model.DBTables;
 import model.EstacoesDAO;
 import model.ReservasDAO;
 import model.UsuariosDAO;
@@ -57,6 +59,7 @@ public class Inicio extends JFrame {
 	 * Create the frame.
 	 */
 	public Inicio() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 565, 458);
 		contentPane = new JPanel();
@@ -102,29 +105,31 @@ public class Inicio extends JFrame {
 			    	id = "ASDFGHJK";
 					user = UsuariosDAO.procurarFuncionario(id);
 			    } else if (evt.getKeyCode() == KeyEvent.VK_W) {
-			    	id = "PLKMNFRX";
+			    	id = "FCVPJK33";
 					user = UsuariosDAO.procurarFuncionario(id);
 			    } else if (evt.getKeyCode() == KeyEvent.VK_E) {
-			    	id = "POIUYTRE";
+			    	id = "J3SQ1X55";
 					user = UsuariosDAO.procurarFuncionario(id);
 			    } else if (evt.getKeyCode() == KeyEvent.VK_R) {
-			    	id = "QAZXSWED";
+			    	id = "OJHH44R7";
 					user = UsuariosDAO.procurarFuncionario(id);
 			    } else if (evt.getKeyCode() == KeyEvent.VK_T) {
-			    	id = "QWERTYUI";
+			    	id = "QPFLC3S1";
 					user = UsuariosDAO.procurarFuncionario(id);
 			    } else if (evt.getKeyCode() == KeyEvent.VK_Y) {
-			    	id = "UJVESLO1";
+			    	id = "QWERTYUI";
 					user = UsuariosDAO.procurarFuncionario(id);
 			    } else if (evt.getKeyCode() == KeyEvent.VK_U) {
-			    	id = "VFRTGBNJ";
+			    	id = "TFVEDCIJ";
 					user = UsuariosDAO.procurarFuncionario(id);
 			    } else if (evt.getKeyCode() == KeyEvent.VK_I) {
-			    	id = "YFGVSQZA";
+			    	id = "ZXASQW12";
 					user = UsuariosDAO.procurarFuncionario(id);
 			    } else if (evt.getKeyCode() == KeyEvent.VK_O) {
-			    	id = "ZXCVBNMP";
+			    	id = "ZXCVBNML";
 					user = UsuariosDAO.procurarFuncionario(id);
+			    } else if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+			    	DadosPadrao.dadosPadrao();
 			    } else {
 			    	System.out.println("Usuário não identificado.");
 			    }

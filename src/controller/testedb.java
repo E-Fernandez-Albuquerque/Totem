@@ -5,10 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import model.DBConnection;
+import model.DBTables;
 public class testedb {
 	
 	public static void criarTableRegistro() {
-		Connection conexao = DBConnection.conectDB();
+		Connection conexao = DBConnection.conectaDB();
 		PreparedStatement statement = null;
 		try {
 			statement = conexao.prepareStatement("CREATE TABLE IF NOT EXISTS usuarios_cesar "

@@ -18,8 +18,8 @@ import model.ReservasDAO;
 public class teste_exec {
 
 	public static void main(String[] args) throws SQLException {
-		
-		DBTables.criarTabelaReservas();
+		//DBTables.criarDB();
+		//DBTables.criarTabelaReservas();
 		//DBTables.criarTabelaReservas();
 		//UsuariosDAO.inserirFuncionario("32112ARR", "Eric", "Desenvolvimento");
 		//EstacoesDAO.inserirEstacao("A22");

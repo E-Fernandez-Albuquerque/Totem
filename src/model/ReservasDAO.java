@@ -98,7 +98,7 @@ public class ReservasDAO {
 	*/
 	//FUNÇÃO QUE REGISTRA UMA NOVA RESERVA
 	public static void inserirReserva(String idEstacao, String data, String dataHoraInicio, String dataHoraFim, String checkin, String checkout, String idFuncionario) {
-		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 		
 		try {
@@ -117,7 +117,7 @@ public class ReservasDAO {
 	}
 	//REALIZA O CHECKIN DE UMA RESERVA
 	public static void fazerCheckin(String id, String data, String horaInicio) {
-		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 		ResultSet result;//MODELO DE RETORNO DE VALORES DO DB
 		try {
@@ -142,7 +142,7 @@ public class ReservasDAO {
 	}
 	//VERIFICA STATUS DA RESERVA - RETORNA BOOLEANO
 	public static boolean verificaReserva(String idFuncionario, String data) {
-		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 		ResultSet reserva;
 		
@@ -161,7 +161,7 @@ public class ReservasDAO {
 	}
 	//VERIFICA STATUS DE CHECKIN - RETORNA BOOLEANO
 	public static boolean verificaCheckinReserva(String idFuncionario, String data) {
-		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 		ResultSet reserva;
 		
@@ -185,7 +185,7 @@ public class ReservasDAO {
 	}
 	//FAZ CHECKOUT
 	public static void fazerCheckout(String id, String data, String horaSaida) {
-		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 		ResultSet result;//MODELO DE RETORNO DE VALORES DO DB
 		try {
@@ -209,7 +209,7 @@ public class ReservasDAO {
 	}
 	//VERIFICA STATUS DO CHECKOUT - RETORNA BOOLEANO
 	public static boolean verificaCheckoutReserva(String idFuncionario, String data) {
-		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 		ResultSet reserva;
 		
@@ -233,7 +233,7 @@ public class ReservasDAO {
 	}
 	
 	public static ResultSet dadosReserva(String idFuncionario, String data) {
-		Connection connection = DBConnection.conectDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
 		ResultSet reserva;
 		
