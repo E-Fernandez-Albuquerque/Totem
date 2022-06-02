@@ -10,7 +10,6 @@ public class DadosPadrao {
 	public static void dadosPadrao(){
 		DBConnection.conectaDB();
 		int count = 0;
-		DBTables.criarDB("cesar2");
 		DBTables.criarTabelaEstacoes();
 		DBTables.criarTabelaFuncionarios();
 		DBTables.criarTabelaReservas();

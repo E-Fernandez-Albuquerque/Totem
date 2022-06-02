@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Concluido extends JFrame {
+public class Concluido<fecharJanela> extends JFrame {
 
 	private JPanel contentPane;
 
@@ -62,6 +62,9 @@ public class Concluido extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon("src/img/concluido.gif"));
 		lblNewLabel.setBounds(0, 11, 760, 391);
 		contentPane.add(lblNewLabel);
+	}	
 	}
-}
+
+
+
 
