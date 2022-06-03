@@ -19,6 +19,16 @@ public class UsuariosDAO {
 				statement.executeUpdate();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
 			}catch (SQLException e){
 				e.printStackTrace();
+			} finally {
+				try {
+					if(statement != null){
+						statement.close();
+					}
+					connection.close();
+				} catch (SQLException e) {
+					// LOGGING
+					e.printStackTrace();
+				}
 			}
 		}
 		
@@ -34,6 +44,6 @@ public class UsuariosDAO {
 				return result;
 			} catch (SQLException e) {
 				return null;
-			}
+			} 
 		}
 }

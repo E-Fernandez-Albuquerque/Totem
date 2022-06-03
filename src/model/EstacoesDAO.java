@@ -58,6 +58,16 @@ public class EstacoesDAO {
 			statement.executeUpdate();
 		}catch (SQLException e){
 			e.printStackTrace();//EXIBIR OS ERROS DE CÓDIGO SQL
+		} finally {
+			try {
+				if(statement != null){
+					statement.close();
+				}
+				connection.close();
+			} catch (SQLException e) {
+				// LOGGING
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -78,7 +88,7 @@ public class EstacoesDAO {
 			return estacoes;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		} 
 		return estacoes;
 	}
 }

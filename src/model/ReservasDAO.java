@@ -113,6 +113,16 @@ public class ReservasDAO {
 			statement.executeUpdate();//EXECUTA A QUERY INSERIDA NO PREPARESTATEMENT
 		}catch (SQLException e){
 			e.printStackTrace();
+		} finally {
+			try {
+				if(statement != null){
+					statement.close();
+				}
+				connection.close();
+			} catch (SQLException e) {
+				// LOGGING
+				e.printStackTrace();
+			}
 		}
 	}
 	//REALIZA O CHECKIN DE UMA RESERVA
@@ -138,6 +148,16 @@ public class ReservasDAO {
 			}
 		} catch (SQLException e){
 			e.printStackTrace();
+		} finally {
+			try {
+				if(statement != null){
+					statement.close();
+				}
+				connection.close();
+			} catch (SQLException e) {
+				// LOGGING
+				e.printStackTrace();
+			}
 		}
 	}
 	//VERIFICA STATUS DA RESERVA - RETORNA BOOLEANO
@@ -156,6 +176,16 @@ public class ReservasDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(statement != null){
+					statement.close();
+				}
+				connection.close();
+			} catch (SQLException e) {
+				// LOGGING
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}
@@ -180,6 +210,16 @@ public class ReservasDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(statement != null){
+					statement.close();
+				}
+				connection.close();
+			} catch (SQLException e) {
+				// LOGGING
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}
@@ -205,6 +245,16 @@ public class ReservasDAO {
 			}
 		} catch (SQLException e){
 			e.printStackTrace();
+		} finally {
+			try {
+				if(statement != null){
+					statement.close();
+				}
+				connection.close();
+			} catch (SQLException e) {
+				// LOGGING
+				e.printStackTrace();
+			}
 		}
 	}
 	//VERIFICA STATUS DO CHECKOUT - RETORNA BOOLEANO
@@ -228,6 +278,16 @@ public class ReservasDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(statement != null){
+					statement.close();
+				}
+				connection.close();
+			} catch (SQLException e) {
+				// LOGGING
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}
@@ -248,6 +308,37 @@ public class ReservasDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} 
+		return null;
+	}
+	
+	public static String usuarioReserva(String estacao) {
+		Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
+		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
+		ResultSet nome;
+		
+		try {
+			statement = connection.prepareStatement("SELECT id_funcionario FROM reservas WHERE id_estacao = ?");
+			statement.setString(1, estacao);
+			ResultSet dados = statement.executeQuery();
+			dados.next();
+			if (dados != null) {
+				String id = dados.getString("id_funcionario");
+				nome = UsuariosDAO.procurarFuncionario(id);
+				return nome.getString("nome");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(statement != null){
+					statement.close();
+				}
+				connection.close();
+			} catch (SQLException e) {
+				// LOGGING
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
