@@ -344,10 +344,10 @@ public class Reserva extends JFrame {
 		JLabel lblCesar = new JLabel("");
 		ImageIcon imageIconCesar = new ImageIcon("src/img/23_05_2022_20_04_58-removebg-preview.png"); // load the image to a imageIcon
 		Image imageCesar = imageIconCesar.getImage(); // transform it 
-		Image newimgCesar = imageCesar.getScaledInstance(90, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		Image newimgCesar = imageCesar.getScaledInstance(50, 28,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIconCesar = new ImageIcon(newimgCesar);  // transform it back
 		lblCesar.setIcon(imageIconCesar);
-		lblCesar.setBounds(0, 0, 115, 67);
+		lblCesar.setBounds(0, 0, 50, 28);
 		contentPane.add(lblCesar);
 		
 //		JLabel lblNewLabel = new JLabel("");
