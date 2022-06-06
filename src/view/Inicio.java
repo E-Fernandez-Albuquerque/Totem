@@ -67,8 +67,6 @@ public class Inicio extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		Scanner sc = new Scanner(System.in);
-		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255,255,255,220));
 		panel.setBounds(67, 185, 414, 91);
@@ -91,7 +89,6 @@ public class Inicio extends JFrame {
 		this.addKeyListener(new java.awt.event.KeyAdapter() {
 			  public void keyPressed(java.awt.event.KeyEvent evt) {
 				//String horaInicio = "2022-05-15 08:00:00";
-					String horaSaida = "22:00";
 					Date data = new Date();
 					SimpleDateFormat fmtdData = new SimpleDateFormat("yyyy-MM-dd");
 					SimpleDateFormat fmtdHora = new SimpleDateFormat("HH:mm");
@@ -189,6 +186,13 @@ public class Inicio extends JFrame {
 					}
 				} else {//CASO ID NÃO SEJA IDENTIFICADO
 					System.out.println("Usuário não identificado");
+				}
+			    
+			    try {
+					user.close();
+				} catch (SQLException e) {
+					// LOGGING
+					e.printStackTrace();
 				}
 			    
 			  }

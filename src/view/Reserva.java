@@ -133,12 +133,12 @@ public class Reserva extends JFrame {
 		lbl_info.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_info.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("Horario de saída:");
-		lblNewLabel_1_1_1_1.setBounds(54, 166, 202, 34);
-		panel.add(lblNewLabel_1_1_1_1);
-		lblNewLabel_1_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_1_1.setForeground(new Color(255, 51, 0));
-		lblNewLabel_1_1_1_1.setFont(new Font("Segoe UI", Font.PLAIN, 25));
+		JLabel lblHorario = new JLabel("Horario de saída:");
+		lblHorario.setBounds(54, 166, 202, 34);
+		panel.add(lblHorario);
+		lblHorario.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblHorario.setForeground(new Color(255, 51, 0));
+		lblHorario.setFont(new Font("Segoe UI", Font.PLAIN, 25));
 		JFormattedTextField fmtHour = new JFormattedTextField(fmtHourMask);
 		fmtHour.setBounds(266, 166, 99, 35);
 		panel.add(fmtHour);
@@ -146,49 +146,49 @@ public class Reserva extends JFrame {
 		fmtHour.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
 		
-		JLabel lblNewLabel_1_1_2_1_1 = new JLabel("Estações livres:");
-		lblNewLabel_1_1_2_1_1.setBounds(27, 211, 229, 35);
-		panel.add(lblNewLabel_1_1_2_1_1);
-		lblNewLabel_1_1_2_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_2_1_1.setForeground(new Color(255, 51, 0));
-		lblNewLabel_1_1_2_1_1.setFont(new Font("Segoe UI", Font.PLAIN, 25));
+		JLabel lblEstacoes = new JLabel("Estações livres:");
+		lblEstacoes.setBounds(27, 211, 229, 35);
+		panel.add(lblEstacoes);
+		lblEstacoes.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEstacoes.setForeground(new Color(255, 51, 0));
+		lblEstacoes.setFont(new Font("Segoe UI", Font.PLAIN, 25));
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(266, 211, 99, 35);
 		panel.add(comboBox);
 		
-		JButton btnNewButton = new JButton("Confirmar");
-		btnNewButton.setBounds(230, 275, 135, 31);
-		panel.add(btnNewButton);
-		btnNewButton.setBackground(new Color(255, 51, 0));
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("Segoe UI Historic", Font.BOLD, 11));
+		JButton btnConfirma = new JButton("Confirmar");
+		btnConfirma.setBounds(230, 275, 135, 31);
+		panel.add(btnConfirma);
+		btnConfirma.setBackground(new Color(255, 51, 0));
+		btnConfirma.setForeground(Color.WHITE);
+		btnConfirma.setFont(new Font("Segoe UI Historic", Font.BOLD, 11));
 		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnCancela = new JButton("Cancelar");
+		btnCancela.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Inicio screen = new Inicio();
 				screen.setVisible(true);
 				dispose();
 			}
 		});
-		btnNewButton_1.setBounds(117, 279, 89, 23);
-		panel.add(btnNewButton_1);
+		btnCancela.setBounds(117, 279, 89, 23);
+		panel.add(btnCancela);
 		
-		JLabel lblNewLabel_1 = new JLabel("Sem estações disponíveis. Tente novamente mais tarde.");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_1.setForeground(Color.RED);
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(0, 134, 429, 14);
-		panel.add(lblNewLabel_1);
-		lblNewLabel_1.setVisible(false);
+		JLabel lblIndisponivel = new JLabel("Sem estações disponíveis. Tente novamente mais tarde.");
+		lblIndisponivel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblIndisponivel.setForeground(Color.RED);
+		lblIndisponivel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIndisponivel.setBounds(0, 134, 429, 14);
+		panel.add(lblIndisponivel);
+		lblIndisponivel.setVisible(false);
 		ImageIcon imageIcon = new ImageIcon("src/img/mapa"); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(252, 440,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIcon = new ImageIcon(newimg);  // transform it back
 		
 		
-		btnNewButton.addActionListener(new ActionListener() {
+		btnConfirma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//String data = ftmData.getText();
 				String horaSaida = (fmtHour.getText());
@@ -335,20 +335,10 @@ public class Reserva extends JFrame {
 		btnA07.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		btnA07.setBounds(646, 44, 28, 20);
 		contentPane.add(btnA07);
-		
-		JLabel lblMap = new JLabel("");
-		lblMap.setBounds(472, 0, 252, 442);
-		contentPane.add(lblMap);
-		lblMap.setIcon(imageIcon);
-		
-		JLabel lblCesar = new JLabel("");
 		ImageIcon imageIconCesar = new ImageIcon("src/img/23_05_2022_20_04_58-removebg-preview.png"); // load the image to a imageIcon
 		Image imageCesar = imageIconCesar.getImage(); // transform it 
 		Image newimgCesar = imageCesar.getScaledInstance(50, 28,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIconCesar = new ImageIcon(newimgCesar);  // transform it back
-		lblCesar.setIcon(imageIconCesar);
-		lblCesar.setBounds(0, 0, 50, 28);
-		contentPane.add(lblCesar);
 		
 //		JLabel lblNewLabel = new JLabel("");
 //		//lblNewLabel.setIcon(imageIconBack);
@@ -359,10 +349,9 @@ public class Reserva extends JFrame {
 		System.out.println(estacoes.size());
 		if (estacoes.size() == 0) {
 			comboBox.setEnabled(false);
-			btnNewButton.setEnabled(false);
+			btnConfirma.setEnabled(false);
 			fmtHour.setEnabled(false);
-			btnNewButton.setBackground(new Color(200, 200, 200));
-			lblNewLabel_1.setVisible(true);
+			lblIndisponivel.setVisible(true);
 			
 		} else {
 			while(count < estacoes.size()) {
@@ -377,6 +366,8 @@ public class Reserva extends JFrame {
 		}
 		System.out.print(total);
 		
+		for (int i = 0; i < estacoes.size(); i++)
+		
 		MapaInterativo.disponibilidade(estacoes, btnA01);
 		MapaInterativo.disponibilidade(estacoes, btnA02);
 		MapaInterativo.disponibilidade(estacoes, btnA03);
@@ -385,7 +376,77 @@ public class Reserva extends JFrame {
 		MapaInterativo.disponibilidade(estacoes, btnA06);
 		MapaInterativo.disponibilidade(estacoes, btnA07);
 		
-//		MapaInterativo.indisponibilidade(estacoes, btnA01, comboBox, "A01");
+		JLabel lblA01 = new JLabel("");
+		lblA01.setFont(new Font("Tahoma", Font.BOLD, 9));
+		lblA01.setBounds(486, 30, 60, 14);
+		lblA01.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblA01);
+		
+		JLabel lblA03 = new JLabel("");
+		lblA03.setFont(new Font("Tahoma", Font.BOLD, 9));
+		lblA03.setBounds(534, 30, 60, 14);
+		lblA03.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblA03);
+		
+		JLabel lblA05 = new JLabel("");
+		lblA05.setFont(new Font("Tahoma", Font.BOLD, 9));
+		lblA05.setBounds(582, 30, 60, 14);
+		lblA05.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblA05);
+		
+		JLabel lblA07 = new JLabel("");
+		lblA07.setFont(new Font("Tahoma", Font.BOLD, 9));
+		lblA07.setBounds(630, 30, 60, 14);
+		lblA07.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblA07);
+		
+		JLabel lblA02 = new JLabel("");
+		lblA02.setFont(new Font("Tahoma", Font.BOLD, 9));
+		lblA02.setBounds(486, 200, 60, 14);
+		lblA02.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblA02);
+		
+		JLabel lblA04 = new JLabel("");
+		lblA04.setFont(new Font("Tahoma", Font.BOLD, 9));
+		lblA04.setBounds(534, 200, 60, 14);
+		lblA04.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblA04);
+		
+		JLabel lblA06 = new JLabel("");
+		lblA06.setFont(new Font("Tahoma", Font.BOLD, 9));
+		lblA06.setBounds(582, 200, 60, 14);
+		lblA06.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblA06);
+		
+		JLabel lblMap = new JLabel("");
+		lblMap.setBounds(472, 0, 252, 442);
+		contentPane.add(lblMap);
+		lblMap.setIcon(imageIcon);
+		
+		JLabel lblCesar = new JLabel("");
+		lblCesar.setIcon(imageIconCesar);
+		lblCesar.setBounds(0, 0, 50, 28);
+		contentPane.add(lblCesar);
+		
+		ArrayList<JLabel> labelsEstacoes = new ArrayList<JLabel>();
+		labelsEstacoes.add(lblA01);
+		labelsEstacoes.add(lblA02);
+		labelsEstacoes.add(lblA03);
+		labelsEstacoes.add(lblA04);
+		labelsEstacoes.add(lblA05);
+		labelsEstacoes.add(lblA06);
+		labelsEstacoes.add(lblA07);
+		
+		MapaInterativo.ocupacao(estacoes, labelsEstacoes);
+		
+		try {
+			funcionario.close();
+		} catch (SQLException e) {
+			// LOGGING
+			e.printStackTrace();
+		}
+		
+//		MapaInterativo.indisponibilidade(estacoes, btnA01);
 //		MapaInterativo.indisponibilidade(estacoes, btnA02, comboBox, "A02");
 //		MapaInterativo.indisponibilidade(estacoes, btnA03, comboBox, "A03");
 		

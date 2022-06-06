@@ -11,7 +11,7 @@ public class DBConnection {
 	static String database = "";
 	//VARIÁVEIS RESPONSÁVEIS PELA CONEXÃO COM O BANCO DE DADOS
 	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static String URL = "jdbc:mysql://localhost:3306/" + database + "?useUnicode=yes&characterEncoding=UTF-8&useSSL=false";
+	private static String URL = "jdbc:mysql://localhost:3306/" + database + "?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&max-connections=1500";
 	private static final String USER = "root";
 	private static final String PWD = "";
 	

@@ -1,13 +1,16 @@
 package controller;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
+import model.EstacoesDAO;
 import model.ReservasDAO;
 
 public class MapaInterativo {
@@ -30,18 +33,27 @@ public class MapaInterativo {
 		}
 	}
 	
-	public static void indisponibilidade(ArrayList<String> estacoes, JButton estacao, JComboBox comboBox, String estacaoString) {
-		int count = 0;
-		while(count < comboBox.getItemCount()) {
-			System.out.println("INDISPONIBILIDADE: " + comboBox.getItemAt(count) + " / " + comboBox.getItemCount());
-			if (!comboBox.getItemAt(count).equals(estacaoString)) {
-				String nome = ReservasDAO.usuarioReserva(estacaoString);
-				if (nome != null) {
-					estacao.setText(nome);
-				}
+	public static void ocupacao(ArrayList<String> estacoes, ArrayList<JLabel> lbls) {
+		ArrayList<String> todasEstacoes = EstacoesDAO.todasEstacoes();
+		ArrayList<String> lblsOcupadas = new ArrayList<String>();
+		for (int i=0; i < todasEstacoes.size(); i++) {
+			if (!estacoes.contains(todasEstacoes.get(i))) {
+				String usuario = ReservasDAO.usuarioReserva(todasEstacoes.get(i));
+				System.out.println("Usuario: " + usuario);
+				lblsOcupadas.add(usuario);
+			} else {
+				lblsOcupadas.add("");
 			}
-			count++;
+		};
+		
+		for (int j=0; j < lblsOcupadas.size(); j++) {
+			lbls.get(j).setText(lblsOcupadas.get(j));
+		}
+//			for (int j=0; j < estacoes.size(); j++) {
+//				if(todasEstacoes.get(i).equals(estacoes.get(j))) {
+//					lblsOcupadas.add(todasEstacoes.get(i));
+//					break;
+//				} 
+//			}
 		}
 	}
-
-}

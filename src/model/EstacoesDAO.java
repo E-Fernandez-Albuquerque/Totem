@@ -62,8 +62,8 @@ public class EstacoesDAO {
 			try {
 				if(statement != null){
 					statement.close();
+					connection.close();
 				}
-				connection.close();
 			} catch (SQLException e) {
 				// LOGGING
 				e.printStackTrace();
@@ -76,7 +76,7 @@ public class EstacoesDAO {
 	public static ArrayList<String> verificarEstacoesLivres (String data) {
 		Connection connection = DBConnection.conectaDB();
 		PreparedStatement statement = null;
-		ResultSet estacoesLivres;
+		ResultSet estacoesLivres = null;
 		ArrayList<String> estacoes = new ArrayList<>(1);
 		try {
 			statement = connection.prepareStatement("SELECT estacao FROM estacoes WHERE estacao NOT IN (SELECT id_estacao FROM reservas WHERE data = ?)");
@@ -88,7 +88,45 @@ public class EstacoesDAO {
 			return estacoes;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		} finally {
+			try {
+				if(statement != null){
+					statement.close();
+					connection.close();
+				}
+			} catch (SQLException e) {
+				// LOGGING
+				e.printStackTrace();
+			}
+		}
+		return estacoes;
+	}
+	
+	public static ArrayList<String> todasEstacoes(){
+		Connection connection = DBConnection.conectaDB();
+		PreparedStatement statement = null;
+		ResultSet estacoesLivres = null;
+		ArrayList<String> estacoes = new ArrayList<>(1);
+		try {
+			statement = connection.prepareStatement("SELECT estacao FROM estacoes");
+			estacoesLivres = statement.executeQuery();
+			while (estacoesLivres.next()) {
+				estacoes.add(estacoesLivres.getString("estacao"));
+			}
+			return estacoes;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(statement != null){
+					statement.close();
+					connection.close();
+				}
+			} catch (SQLException e) {
+				// LOGGING
+				e.printStackTrace();
+			}
+		}
 		return estacoes;
 	}
 }

@@ -23,8 +23,8 @@ public class UsuariosDAO {
 				try {
 					if(statement != null){
 						statement.close();
+						connection.close();
 					}
-					connection.close();
 				} catch (SQLException e) {
 					// LOGGING
 					e.printStackTrace();
@@ -35,7 +35,7 @@ public class UsuariosDAO {
 		public static ResultSet procurarFuncionario(String id) {
 			Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 			PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
-			ResultSet result;
+			ResultSet result = null;
 			try {
 				statement = connection.prepareStatement("SELECT * FROM funcionarios WHERE id = ?");//COMANDO SQL
 				statement.setString(1, id);//SUBSTITUI O VALOR DA "?" DO STATEMENT 

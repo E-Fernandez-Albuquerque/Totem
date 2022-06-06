@@ -117,8 +117,8 @@ public class ReservasDAO {
 			try {
 				if(statement != null){
 					statement.close();
+					connection.close();
 				}
-				connection.close();
 			} catch (SQLException e) {
 				// LOGGING
 				e.printStackTrace();
@@ -151,12 +151,24 @@ public class ReservasDAO {
 		} finally {
 			try {
 				if(statement != null){
-					statement.close();
+					statement.close();				
+					connection.close();
 				}
-				connection.close();
+
 			} catch (SQLException e) {
 				// LOGGING
 				e.printStackTrace();
+			} finally {
+				try {
+					if(statement != null){
+						statement.close();
+						connection.close();
+					}
+					connection.close();
+				} catch (SQLException e) {
+					// LOGGING
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -185,6 +197,16 @@ public class ReservasDAO {
 			} catch (SQLException e) {
 				// LOGGING
 				e.printStackTrace();
+			}finally {
+				try {
+					if(statement != null){
+						statement.close();
+						connection.close();
+					}
+				} catch (SQLException e) {
+					// LOGGING
+					e.printStackTrace();
+				}
 			}
 		}
 		return false;
@@ -214,8 +236,8 @@ public class ReservasDAO {
 			try {
 				if(statement != null){
 					statement.close();
+					connection.close();
 				}
-				connection.close();
 			} catch (SQLException e) {
 				// LOGGING
 				e.printStackTrace();
@@ -227,7 +249,7 @@ public class ReservasDAO {
 	public static void fazerCheckout(String id, String data, String horaSaida) {
 		Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
-		ResultSet result;//MODELO DE RETORNO DE VALORES DO DB
+		ResultSet result = null;//MODELO DE RETORNO DE VALORES DO DB
 		try {
 			statement = connection.prepareStatement("select * from reservas where id_funcionario = ? and data = ?");//COMANDO SQL
 			statement.setString(1, id);//SUBSTITUI O VALOR DA "?" DO STATEMENT 
@@ -249,8 +271,8 @@ public class ReservasDAO {
 			try {
 				if(statement != null){
 					statement.close();
+					connection.close();
 				}
-				connection.close();
 			} catch (SQLException e) {
 				// LOGGING
 				e.printStackTrace();
@@ -282,8 +304,8 @@ public class ReservasDAO {
 			try {
 				if(statement != null){
 					statement.close();
+					connection.close();
 				}
-				connection.close();
 			} catch (SQLException e) {
 				// LOGGING
 				e.printStackTrace();
@@ -295,7 +317,7 @@ public class ReservasDAO {
 	public static ResultSet dadosReserva(String idFuncionario, String data) {
 		Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
-		ResultSet reserva;
+		ResultSet reserva = null;
 		
 		try {
 			statement = connection.prepareStatement("SELECT * FROM reservas WHERE id_funcionario = ? AND data = ?");
@@ -315,7 +337,7 @@ public class ReservasDAO {
 	public static String usuarioReserva(String estacao) {
 		Connection connection = DBConnection.conectaDB();//ESTABELECIMENTO DE CONEXÃO COM DB
 		PreparedStatement statement = null;//RESPONSÁVEL POR EXECUTAR AS QUERYS SQL
-		ResultSet nome;
+		ResultSet nome = null;
 		
 		try {
 			statement = connection.prepareStatement("SELECT id_funcionario FROM reservas WHERE id_estacao = ?");
@@ -333,8 +355,8 @@ public class ReservasDAO {
 			try {
 				if(statement != null){
 					statement.close();
+					connection.close();
 				}
-				connection.close();
 			} catch (SQLException e) {
 				// LOGGING
 				e.printStackTrace();

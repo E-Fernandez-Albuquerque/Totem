@@ -152,6 +152,13 @@ public class Checkout extends JFrame {
 		lblHoraDeEntrada_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHoraDeEntrada_1.setForeground(Color.BLACK);
 		lblHoraDeEntrada_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		
+		try {
+			reserva.close();
+		} catch (SQLException e) {
+			// LOGGING
+			e.printStackTrace();
+		}
 	
 	}
 }
