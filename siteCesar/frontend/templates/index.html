@@ -1,31 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/newstyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>Document</title>
 </head>
+
 <body>
-    <div id="form">
-        <h1>Reservar estação de trabalho</h1>
-        <form method='POST'>
-            {% csrf_token %}
-            <input type="text" name="data">
-            <input type="text" name="reserva_inicia_em">
-            <input type="text" name="reserva_termina_em">
-            <select name="id_estacao">
-                <option value="A01">A01</option>
-                <option value="A02">A02</option>
-                <option value="A03">A03</option>
-                <option value="A04">A04</option>
-                <option value="A05">A05</option>
-                <option value="A06">A06</option>
-                <option value="A07">A07</option>
-            </select>
-            <input type="hidden" name="id_funcionario" value="QWERTYUI">
-            <input type="submit" value="Registrar">
-        </form>
+    <header>
+        <div class="img-header">
+            <img src="../static/images/logo_cesar.png">
+        </div>
+        <div class="span-header">
+            <span>Olá! Bem-vindo(a) ao sistema de reservas do CESAR!</span>
+        </div>
+        <div></div>
+    </header>
+
+    <div class="reserva-container">
+        <div class="reserva-navbar">
+            <div>
+                <span>Área de reservas</span>
+            </div>
+            <div>
+                <span>Minha conta</span>
+            </div>
+            <div>
+                <span>Fale conosco</span>
+            </div>
+            <div>
+                <span>Como utilizar o sistema</span>
+            </div>
+            <div>
+                <span>Sair</span>
+            </div>
+        </div>
+        <div class="reserva-content">
+            <div class="reserva-form">
+                <h3>INFORME OS DADOS DA RESERVA DE ESTAÇÃO:</h3>
+                <form method='POST'>
+                    {% csrf_token %}
+                    <div class="form-component">
+                        <label for="data">Data do check-in:</label>
+                        <input type="date" placeholder="aaaa-mm-dd" class="form-control" name="data">
+                    </div>
+                    <div class="form-component">
+                        <label for="reserva_inicia_em">Início da reserva:</label>
+                        <input type="time" class="form-control" placeholder='hh:mm' name="reserva_inicia_em">
+                    </div>
+                    <div class="form-component">
+                        <label for="reserva_termina_em">Início da reserva:</label>
+                        <input type="time" class="form-control" placeholder='hh:mm' name="reserva_termina_em">
+                    </div>
+                    <div class="form-component">
+                        <label>Estação:</label>
+                        <select name="id_estacao" class='form-select'>
+                            <option value="A01">A01</option>
+                            <option value="A02">A02</option>
+                            <option value="A03">A03</option>F
+                            <option value="A04">A04</option>
+                            <option value="A05">A05</option>
+                            <option value="A06">A06</option>
+                            <option value="A07">A07</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="id_funcionario" value="QWERTYUI">
+                    <div class="covid-container">
+                        <span class="covid-text">Confirmo que estou devidamente imunizado contra a COVID-19 e seguirei
+                            todas as medidas sanitárias estabelecidas para o trabalho presencial.</span>
+                    </div>
+                    <input type="submit" value="Concluir reserva" class="btn btn-primary btn-lg">
+                    <input type="button" value="Cancelar" class="btn btn-primary btn-lg cancel">
+                </form>
+            </div>
+            <div class="map">
+                <img src="../static/images/estacoes.png">
+            </div>
+        </div>
+
     </div>
 </body>
+
 </html>

@@ -1,0 +1,159 @@
+html, body{
+    padding: 0;
+    margin: 0;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 12vh;
+    box-shadow: 0px 6px 10px rgba(161, 159, 154, 0.3);
+}
+
+.span-header{
+    display: flex;
+    justify-content: flex-start;
+    width: 70%;
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #666;
+}
+
+.img-header img{
+    max-height: 10vh;
+}
+
+.reserva-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.reserva-navbar{
+    margin-top: 4vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 18%;
+    height: 80vh;
+    background-color: #fff;
+    padding: 5px 8px;
+    z-index: 0;
+}
+
+.reserva-navbar div{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 85% !important;
+    padding: 10px 15px !important;
+    transition: ease 0.4s all !important;
+    border-radius: 8px !important;
+    height: 43px !important;
+    cursor: pointer !important;
+}
+
+.reserva-navbar div:hover{
+    background-color: #ededed;
+}
+
+.reserva-content{
+    display: flex;
+    flex-direction: row;
+    background-color: #ddd;
+    width: 85%;
+    height: 89vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.reserva-form{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0px 6px 10px rgba(161, 159, 154, 0.3);
+    padding: 12px;
+    margin: 15px 30px;
+    width: 65%;
+    height: 80vh;
+}
+
+.reserva-form h3{
+    font-size: 16px;
+    padding: 10px 0;
+}
+
+.form-component{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-component label{
+    color: #222;
+    font-family: sans-serif;
+    padding: 15px 0 5px;
+}
+
+.form-component input{
+    width: 100%;
+    height: 33px;
+}
+
+.form-component select{
+    width: 15%;
+}
+
+.btn{
+    margin-top: 15px;
+    background-color: #fff !important;
+    border-color: #F7580B !important ;
+    color: #F7580B !important;
+    font-weight: bold !important;
+    width: 30% !important;
+    transition: all ease 1s;
+}
+
+.btn:hover{
+    background-color: #F7580B !important;
+    color: white !important;
+    border-color: white !important;
+}
+
+.covid-container{
+    margin-top: 15px;
+    padding: 5px;
+    display: flex;
+}
+
+.covid-text{
+    font-size: 13px;
+    text-align: center;
+}
+
+.cancel{
+    background-color: #fbfbfb !important;
+    border-color: #666 !important;
+    color: #666 !important;
+    width: 18% !important;
+}
+
+.cancel:hover{
+    background-color: #efefef !important;
+    border-color: #666 !important;
+    color: #666 !important;
+}
+
+.map{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    width: 50%;
+
+}
+
+.map img{
+    height: 80vh;
+    box-shadow: 0px 6px 10px rgba(161, 159, 154, 0.3);
+}
