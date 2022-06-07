@@ -42,7 +42,7 @@ Tecnologia de desenvolvimento: JAVA (JDK 18.0.1.1)
 
 6 - Após a primeira execução, recomenda-se teclar "Enter" para geração do banco de dados com valores previamente preenchidos com os participantes do desenvolvimento do projeto, caso contrário, o sistema não identificará nenhum "funcionário", permanecendo na tela inicial;
 
-7 - Os "IDs" registrados estarão nas teclas [Q, W, E, R, T, Y, U, I, O];
+7 - Os "IDs" registrados estarão nas teclas [Q, W, E, R, T, Y, U, I, O, C];
 
 
 
@@ -70,7 +70,7 @@ Tecnologias de desenvolvimento: Python 3.10.4, Django 4.0.5, HTML 5, CSS3 e Boot
 
 ​	1.2 - Ativar o ambiente virtual por meio do comando `venv/Scripts/activate` (Windows) ou `Source venv/bin/activate` (Linux e MacOS)
 
-​	1.3 - Instalar as bibliotecas necessárias: `pip install -r requirements.txt`
+​	1.3 - Instalar as bibliotecas necessárias: `pip install -r requirements.txt` [Em caso de erro, realizar passo descrito na Obs.2, ao final do Readme]
 
 2 - Realizar a migração das tabelas para o Banco de Dados:
 
@@ -83,3 +83,5 @@ Tecnologias de desenvolvimento: Python 3.10.4, Django 4.0.5, HTML 5, CSS3 e Boot
 ​	3.0 - O servidor será inicializado na porta 8000, sendo então acessado com `localhost:8000` ou `127.0.0.1:8000` no navegador 
 
 Obs: O comando para uso da linguagem Python poderá não funcionar corretamente dependendo das configurações da máquina utlizada, podendo ser corrigido substituindo o termo "py" por "python" ou "python3".
+
+Obs.2: Algumas versões mais recentes do gerenciador de pacotes do Python (pip) apresentam erro durante a instalação das dependências (Fatal error). Nesse caso, recomenda-se o downgrade do pip para a versão 21, a qual apresentou resultado satisfatório no desenvolvimento do projeto. Para realizar o downgrade, basta executar o comando `py -m pip install pip==21` no ambiente (virtual ou local).
