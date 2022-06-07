@@ -48,7 +48,7 @@ Tecnologia de desenvolvimento: JAVA (JDK 18.0.1.1)
 
 ## Site para realização de reserva
 
-Tecnologias de desenvolvimento: Python 3.10.4, Django 4.0.5, HTML 5, CSS3, Javascript e Bootstrap
+Tecnologias de desenvolvimento: Python 3.10.4, Django 4.0.5, HTML 5, CSS3 e Bootstrap
 
 ### Arquivos e programas necessários
 
