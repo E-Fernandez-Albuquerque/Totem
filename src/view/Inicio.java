@@ -127,7 +127,10 @@ public class Inicio extends JFrame {
 					user = UsuariosDAO.procurarFuncionario(id);
 			    } else if (evt.getKeyCode() == KeyEvent.VK_ENTER){
 			    	DadosPadrao.dadosPadrao();
-			    } else {
+			    } else if (evt.getKeyCode() == KeyEvent.VK_C) {
+			    	id = "IDCARLOS";
+					user = UsuariosDAO.procurarFuncionario(id);
+			    }else {
 			    	System.out.println("Usuário não identificado.");
 			    }
 			    try {

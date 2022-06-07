@@ -11,9 +11,12 @@ import model.ReservasDAO;
 import model.UsuariosDAO;
 
 import javax.swing.JLabel;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -63,7 +66,7 @@ public class Checkin extends JFrame {
 		String nome = funcionario.getString("nome");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 734, 385);
+		setBounds(100, 100, 643, 372);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -79,16 +82,29 @@ public class Checkin extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton.setBackground(new Color(255, 51, 0));
+		btnNewButton.setBackground(new Color(101, 236, 43));
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setFont(new Font("Segoe UI Historic", Font.BOLD, 11));
-		btnNewButton.setBounds(281, 264, 131, 39);
+		btnNewButton.setBounds(248, 245, 131, 39);
 		contentPane.add(btnNewButton);
 		
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("src/img/23_05_2022_20_04_58-removebg-preview.png"));
-		lblNewLabel_3.setBounds(10, 11, 115, 67);
-		contentPane.add(lblNewLabel_3);
+		JLabel lblPhoto = new JLabel("");
+		ImageIcon imageIconPh = new ImageIcon("src/img/photo.png"); // load the image to a imageIcon
+		Image imagePh = imageIconPh.getImage(); // transform it 
+		Image newimgPh = imagePh.getScaledInstance(252, 155,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		imageIconPh = new ImageIcon(newimgPh);  // transform it back
+		lblPhoto.setIcon(imageIconPh);
+		lblPhoto.setBounds(10, 39, 252, 155);
+		contentPane.add(lblPhoto);
+		
+		JLabel lblCesar = new JLabel("");
+		ImageIcon imageIconCesar = new ImageIcon("src/img/23_05_2022_20_04_58-removebg-preview.png"); // load the image to a imageIcon
+		Image imageCesar = imageIconCesar.getImage(); // transform it 
+		Image newimgCesar = imageCesar.getScaledInstance(50, 28,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		imageIconCesar = new ImageIcon(newimgCesar);  // transform it back
+		lblCesar.setIcon(imageIconCesar);
+		lblCesar.setBounds(0, 0, 50, 28);
+		contentPane.add(lblCesar);
 		
 		JButton btnNewButton_1 = new JButton("Cancelar");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -98,72 +114,54 @@ public class Checkin extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_1.setBounds(302, 314, 89, 23);
+		btnNewButton_1.setBounds(269, 295, 89, 23);
+		btnNewButton_1.setForeground(new Color(236, 99, 43));
 		contentPane.add(btnNewButton_1);
 		
-		JLabel lblNewLabel = new JLabel("Check-in");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(0, 22, 718, 33);
-		contentPane.add(lblNewLabel);
-		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 100, 50));
-		panel.setBounds(10, 89, 698, 163);
+		panel.setBackground(new Color(255, 255, 255));
+		panel.setBounds(232, 50, 371, 133);
+		panel.setBorder(BorderFactory.createLineBorder(new Color(236, 99, 43)));
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lbl_nome = new JLabel("Label nome");
-		lbl_nome.setBounds(0, 11, 698, 39);
+		lbl_nome.setBounds(10, 11, 351, 39);
 		panel.add(lbl_nome);
 		lbl_nome.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_nome.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		
 		lbl_nome.setText("Olá, " + nome);
 		
-		JLabel lblNewLabel_2 = new JLabel("Horário de entrada");
-		lblNewLabel_2.setBounds(10, 62, 241, 32);
-		panel.add(lblNewLabel_2);
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		
 		JLabel lbl_entrada = new JLabel("New label");
-		lbl_entrada.setBounds(35, 115, 184, 36);
+		lbl_entrada.setBounds(10, 48, 351, 36);
 		panel.add(lbl_entrada);
 		lbl_entrada.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_entrada.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lbl_entrada.setText(entrada);
-		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Horário de saída");
-		lblNewLabel_1_1_1.setBounds(231, 62, 210, 32);
-		panel.add(lblNewLabel_1_1_1);
-		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lbl_entrada.setText("São " + horaInicio + ". Sua reserva é para as " + entrada);
 		
 		JLabel lbl_saida = new JLabel("New label");
-		lbl_saida.setBounds(261, 117, 138, 32);
+		lbl_saida.setBounds(10, 95, 351, 32);
 		panel.add(lbl_saida);
 		lbl_saida.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_saida.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lbl_saida.setText(saida);
-		
-		JLabel lblNewLabel_1 = new JLabel("Estação utilizada");
-		lblNewLabel_1.setBounds(451, 53, 210, 50);
-		panel.add(lblNewLabel_1);
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lbl_saida.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lbl_saida.setText("A reserva encerra às " + saida);
 		
 		JLabel lbl_estacao = new JLabel("New label");
-		lbl_estacao.setBounds(476, 117, 158, 32);
+		lbl_estacao.setBounds(10, 72, 351, 32);
 		panel.add(lbl_estacao);
 		lbl_estacao.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_estacao.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		
-		lbl_estacao.setText(estacao);
+		lbl_estacao.setText("Estação escolhida: " + estacao);
+		
+		JLabel lblHoraDeEntrada_1 = new JLabel("Deseja realizar o Check-in?");
+		lblHoraDeEntrada_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHoraDeEntrada_1.setForeground(Color.BLACK);
+		lblHoraDeEntrada_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblHoraDeEntrada_1.setBounds(0, 198, 627, 36);
+		contentPane.add(lblHoraDeEntrada_1);
 	}
 }
 

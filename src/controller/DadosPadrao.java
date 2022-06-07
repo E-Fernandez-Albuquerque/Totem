@@ -14,8 +14,8 @@ public class DadosPadrao {
 		DBTables.criarTabelaFuncionarios();
 		DBTables.criarTabelaReservas();
 		String[] estacoes = {"A01", "A02", "A03", "A04", "A05", "A06", "A07"};
-		String[] id = {"QWERTYUI","ASDFGHJK", "ZXCVBNML", "TFVEDCIJ", "J3SQ1X55", "OJHH44R7", "ZXASQW12", "FCVPJK33", "QPFLC3S1"};
-		String[] nome = {"Eric","Beatriz", "Lena", "Renato", "Italo", "Edvan", "Anderson", "Douglas", "Vinicius"};
+		String[] id = {"QWERTYUI","ASDFGHJK", "ZXCVBNML", "TFVEDCIJ", "J3SQ1X55", "OJHH44R7", "ZXASQW12", "FCVPJK33", "QPFLC3S1", "IDCARLOS"};
+		String[] nome = {"Eric","Beatriz", "Lena", "Renato", "Italo", "Edvan", "Anderson", "Douglas", "Vinicius", "Carlos"};
 		while (count < estacoes.length) {
 			EstacoesDAO.inserirEstacao(estacoes[count]);
 			count++;
