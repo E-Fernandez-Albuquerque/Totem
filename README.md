@@ -82,4 +82,4 @@ Tecnologias de desenvolvimento: Python 3.10.4, Django 4.0.5, HTML 5, CSS3, Javas
 
 ​	3.0 - O servidor será inicializado na porta 8000, sendo então acessado com `localhost:8000` ou `127.0.0.1:8000` no navegador 
 
-Obs: O comando para uso da linguagem Python poderá não funcionar corretamente dependendo das configurações da máquina utlizada, podendo ser corrigido subistituindo o termo "py" por "python" ou "python3".
+Obs: O comando para uso da linguagem Python poderá não funcionar corretamente dependendo das configurações da máquina utlizada, podendo ser corrigido substituindo o termo "py" por "python" ou "python3".
