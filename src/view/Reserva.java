@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
@@ -172,21 +173,22 @@ public class Reserva extends JFrame {
 		lblIndisponivel.setBounds(0, 134, 429, 14);
 		panel.add(lblIndisponivel);
 		
-		
-		SpinnerDateModel model = new SpinnerDateModel();
-		model.setCalendarField(Calendar.MINUTE);
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(model);
-		spinner.setEditor(new JSpinner.DateEditor(spinner, "HH:mm"));
-		spinner.setBounds(266, 166, 99, 35);
-		panel.add(spinner);
-		
-		
 		lblIndisponivel.setVisible(false);
 		ImageIcon imageIcon = new ImageIcon("src/img/mapa"); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(252, 440,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIcon = new ImageIcon(newimg);  // transform it back
+		
+		JComboBox comboBox_hora = new JComboBox();
+		ArrayList<String> horarios = new ArrayList<>(Arrays.asList (new String[]{"00:00", "00:30","01:00", "01:30","02:00", "02:30","03:00", "03:30","04:00", "04:30","05:00", "05:30","06:00", "06:30","07:00", "07:30","08:00", "08:30","09:00", "09:30","10:00", "10:30","11:00", "11:30","12:00", "12:30","13:00", "13:30","14:00", "14:30","15:00", "15:30","16:00", "16:30","17:00", "17:30","18:00", "18:30","19:00", "19:30","20:00", "20:30","21:00", "21:30","22:00", "22:30","23:00", "23:30",}));
+		for (int k = 0; k < horarios.size(); k++) {
+			comboBox_hora.addItem(horarios.get(k));
+		}
+		
+		comboBox_hora.setSelectedIndex(14);
+		
+		comboBox_hora.setBounds(266, 166, 99, 35);
+		panel.add(comboBox_hora);
 		
 		
 		btnConfirma.addActionListener(new ActionListener() {
@@ -194,14 +196,12 @@ public class Reserva extends JFrame {
 				//String data = ftmData.getText();
 				
 				SimpleDateFormat fmtdHora = new SimpleDateFormat("HH:mm");
-				Object horaSpinner = spinner.getValue();
-				String hs = fmtdHora.format(horaSpinner);
-				System.out.println(hs);
+				String hora = (String) comboBox_hora.getSelectedItem();
 				
 				String idFuncionario = id;
 				String estacao = (String) comboBox.getSelectedItem();
 				System.out.println(idFuncionario);
-				ReservasDAO.inserirReserva(estacao, data, horaInicio, hs, null, null, idFuncionario);
+				ReservasDAO.inserirReserva(estacao, data, horaInicio, hora, null, null, idFuncionario);
 				ReservasDAO.fazerCheckin(id, data, horaInicio);
 				
 				Concluido screen = new Concluido();
@@ -220,6 +220,8 @@ public class Reserva extends JFrame {
 		});
 		btnCancela.setBounds(117, 279, 89, 23);
 		panel.add(btnCancela);
+		
+		
 		
 		
 		
@@ -366,7 +368,7 @@ public class Reserva extends JFrame {
 		if (estacoes.size() == 0) {
 			comboBox.setEnabled(false);
 			btnConfirma.setEnabled(false);
-			spinner.setEnabled(false);
+			comboBox_hora.setEnabled(false);
 			lblIndisponivel.setVisible(true);
 			
 		} else {

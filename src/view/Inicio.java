@@ -33,6 +33,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import com.raven.swing.TimeComponent;
 
 public class Inicio extends JFrame {
 
