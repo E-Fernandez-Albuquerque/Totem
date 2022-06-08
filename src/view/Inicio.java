@@ -90,6 +90,7 @@ public class Inicio extends JFrame {
 			  public void keyPressed(java.awt.event.KeyEvent evt) {
 				//String horaInicio = "2022-05-15 08:00:00";
 					Date data = new Date();
+					System.out.println(data);
 					SimpleDateFormat fmtdData = new SimpleDateFormat("yyyy-MM-dd");
 					SimpleDateFormat fmtdHora = new SimpleDateFormat("HH:mm");
 					String dataAtual = fmtdData.format(data);

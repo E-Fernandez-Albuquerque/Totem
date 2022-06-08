@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
@@ -30,6 +31,7 @@ import java.awt.Insets;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.SpinnerDateModel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -38,6 +40,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
 
 public class Reserva extends JFrame {
 	/*ImageIcon check = new ImageIcon("check.png");
@@ -139,11 +143,6 @@ public class Reserva extends JFrame {
 		lblHorario.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblHorario.setForeground(new Color(255, 51, 0));
 		lblHorario.setFont(new Font("Segoe UI", Font.PLAIN, 25));
-		JFormattedTextField fmtHour = new JFormattedTextField(fmtHourMask);
-		fmtHour.setBounds(266, 166, 99, 35);
-		panel.add(fmtHour);
-		fmtHour.setHorizontalAlignment(SwingConstants.CENTER);
-		fmtHour.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
 		
 		JLabel lblEstacoes = new JLabel("Estações livres:");
@@ -164,16 +163,7 @@ public class Reserva extends JFrame {
 		btnConfirma.setForeground(Color.WHITE);
 		btnConfirma.setFont(new Font("Segoe UI Historic", Font.BOLD, 11));
 		
-		JButton btnCancela = new JButton("Cancelar");
-		btnCancela.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Inicio screen = new Inicio();
-				screen.setVisible(true);
-				dispose();
-			}
-		});
-		btnCancela.setBounds(117, 279, 89, 23);
-		panel.add(btnCancela);
+		
 		
 		JLabel lblIndisponivel = new JLabel("Sem estações disponíveis. Tente novamente mais tarde.");
 		lblIndisponivel.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -181,6 +171,17 @@ public class Reserva extends JFrame {
 		lblIndisponivel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIndisponivel.setBounds(0, 134, 429, 14);
 		panel.add(lblIndisponivel);
+		
+		
+		SpinnerDateModel model = new SpinnerDateModel();
+		model.setCalendarField(Calendar.MINUTE);
+		JSpinner spinner = new JSpinner();
+		spinner.setModel(model);
+		spinner.setEditor(new JSpinner.DateEditor(spinner, "HH:mm"));
+		spinner.setBounds(266, 166, 99, 35);
+		panel.add(spinner);
+		
+		
 		lblIndisponivel.setVisible(false);
 		ImageIcon imageIcon = new ImageIcon("src/img/mapa"); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
@@ -191,12 +192,16 @@ public class Reserva extends JFrame {
 		btnConfirma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//String data = ftmData.getText();
-				String horaSaida = (fmtHour.getText());
+				
+				SimpleDateFormat fmtdHora = new SimpleDateFormat("HH:mm");
+				Object horaSpinner = spinner.getValue();
+				String hs = fmtdHora.format(horaSpinner);
+				System.out.println(hs);
 				
 				String idFuncionario = id;
 				String estacao = (String) comboBox.getSelectedItem();
 				System.out.println(idFuncionario);
-				ReservasDAO.inserirReserva(estacao, data, horaInicio, horaSaida, null, null, idFuncionario);
+				ReservasDAO.inserirReserva(estacao, data, horaInicio, hs, null, null, idFuncionario);
 				ReservasDAO.fazerCheckin(id, data, horaInicio);
 				
 				Concluido screen = new Concluido();
@@ -204,6 +209,17 @@ public class Reserva extends JFrame {
 				dispose();
 			}
 		});
+		
+		JButton btnCancela = new JButton("Cancelar");
+		btnCancela.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Inicio screen = new Inicio();
+				screen.setVisible(true);
+				dispose();
+			}
+		});
+		btnCancela.setBounds(117, 279, 89, 23);
+		panel.add(btnCancela);
 		
 		
 		
@@ -350,7 +366,7 @@ public class Reserva extends JFrame {
 		if (estacoes.size() == 0) {
 			comboBox.setEnabled(false);
 			btnConfirma.setEnabled(false);
-			fmtHour.setEnabled(false);
+			spinner.setEnabled(false);
 			lblIndisponivel.setVisible(true);
 			
 		} else {
