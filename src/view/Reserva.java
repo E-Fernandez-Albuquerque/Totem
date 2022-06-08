@@ -268,6 +268,87 @@ public class Reserva extends JFrame {
 				comboBox.getModel().setSelectedItem("A01");
 			}
 		});
+		
+		JButton btnA16 = new JButton("A16");
+		btnA16.setMargin(new Insets(0, 0, 0, 0));
+		btnA16.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnA16.setEnabled(false);
+		btnA16.setBackground(new Color(250, 250, 14));
+		btnA16.setForeground(new Color(255,255,255));
+		btnA16.setBounds(646, 352, 28, 20);
+		contentPane.add(btnA16);
+		
+		JButton btnA14 = new JButton("A14");
+		btnA14.setMargin(new Insets(0, 0, 0, 0));
+		btnA14.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnA14.setEnabled(false);
+		btnA14.setBackground(new Color(250, 250, 14));
+		btnA14.setForeground(new Color(255,255,255));
+		btnA14.setBounds(598, 352, 28, 20);
+		contentPane.add(btnA14);
+		
+		JButton btnA12 = new JButton("A12");
+		btnA12.setMargin(new Insets(0, 0, 0, 0));
+		btnA12.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnA12.setEnabled(false);
+		btnA12.setBackground(new Color(250, 250, 14));
+		btnA12.setForeground(new Color(255,255,255));
+		btnA12.setBounds(550, 352, 28, 20);
+		contentPane.add(btnA12);
+		
+		JButton btnA10 = new JButton("A10");
+		btnA10.setMargin(new Insets(0, 0, 0, 0));
+		btnA10.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnA10.setEnabled(false);
+		btnA10.setBackground(new Color(250, 250, 14));
+		btnA10.setForeground(new Color(255,255,255));
+		btnA10.setBounds(502, 352, 28, 20);
+		contentPane.add(btnA10);
+		
+		JButton btnA09 = new JButton("A09");
+		btnA09.setMargin(new Insets(0, 0, 0, 0));
+		btnA09.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnA09.setEnabled(false);
+		btnA09.setBackground(new Color(250, 250, 14));
+		btnA09.setForeground(new Color(255,255,255));
+		btnA09.setBounds(502, 218, 28, 20);
+		contentPane.add(btnA09);
+		
+		JButton btnA15 = new JButton("A15");
+		btnA15.setMargin(new Insets(0, 0, 0, 0));
+		btnA15.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnA15.setEnabled(false);
+		btnA15.setBackground(new Color(250, 250, 14));
+		btnA15.setForeground(new Color(255,255,255));
+		btnA15.setBounds(646, 218, 28, 20);
+		contentPane.add(btnA15);
+		
+		JButton btnA13 = new JButton("A13");
+		btnA13.setMargin(new Insets(0, 0, 0, 0));
+		btnA13.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnA13.setEnabled(false);
+		btnA13.setBackground(new Color(250, 250, 14));
+		btnA13.setForeground(new Color(255,255,255));
+		btnA13.setBounds(598, 218, 28, 20);
+		contentPane.add(btnA13);
+		
+		JButton btnA11 = new JButton("A11");
+		btnA11.setMargin(new Insets(0, 0, 0, 0));
+		btnA11.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnA11.setEnabled(false);
+		btnA11.setBackground(new Color(250, 250, 14));
+		btnA11.setForeground(new Color(255,255,255));
+		btnA11.setBounds(550, 218, 28, 20);
+		contentPane.add(btnA11);
+		
+		JButton btnA08 = new JButton("A08");
+		btnA08.setMargin(new Insets(0, 0, 0, 0));
+		btnA08.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnA08.setEnabled(false);
+		btnA08.setBackground(new Color(250, 250, 14));
+		btnA08.setForeground(new Color(255,255,255));
+		btnA08.setBounds(646, 179, 28, 20);
+		contentPane.add(btnA08);
 		btnA01.setBounds(502, 44, 28, 20);
 		btnA01.setMargin(new Insets(0,0,0,0));
 		//btnA01.setOpaque(false);
